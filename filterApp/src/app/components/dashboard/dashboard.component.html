@@ -1,6 +1,20 @@
 <div class="row pe-3 dashboard">
   <div class="col-3 filter-wrapper">
     <h1>Filters</h1>
+    <div class="filter-item">
+      <img
+        src="../assets/icons/country.svg"
+        class="filter-icon"
+        alt="country-icon"
+        srcset=""
+      />
+      <app-multi-select-dropdown
+        [options]="countrList"
+        [selectedItems]="selectedCountries"
+        (selectionChanged)="onSelectionChange($event)"
+      >
+      </app-multi-select-dropdown>
+    </div>
   </div>
   <div class="col-9 data-wrapper">
     <div class="row p-4">

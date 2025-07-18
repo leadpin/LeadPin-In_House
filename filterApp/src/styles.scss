@@ -10,3 +10,7 @@ body {
   // margin: 0;
 }
 //  "node_modules/bootstrap/scss/bootstrap.scss"
+.dropdown-menu {
+  max-height: 50px !important;
+  overflow-y: auto;
+}

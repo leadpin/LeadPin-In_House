@@ -1,0 +1,26 @@
+<div class="dropdown-container">
+  <button (click)="toggleDropdown()" class="dropdown-button">
+    {{ selectedItems.length > 0 ? selectedItems.join(", ") : "Select Country" }}
+    <span class="icon-wrapper">
+      <img
+        class="arrow-icon"
+        [class.open]="dropdownOpen"
+        src="../assets/icons/down-arrow.png"
+        alt=""
+        srcset=""
+      />
+    </span>
+  </button>
+
+  <div class="dropdown-list" *ngIf="dropdownOpen">
+    <label *ngFor="let option of options" class="dropdown-item">
+      <input
+        class="input-box"
+        type="checkbox"
+        [checked]="isSelected(option)"
+        (change)="toggleSelection(option)"
+      />
+      {{ option }}
+    </label>
+  </div>
+</div>

@@ -12,9 +12,11 @@ import {
   tableFieldsNames,
 } from '../../Modal/excel-constants';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { countrNames } from '../../../constants/filters';
+import { MultiSelectDropdownComponent } from '../../Shared/multi-select-dropdown/multi-select-dropdown.component';
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, NgxPaginationModule],
+  imports: [CommonModule, NgxPaginationModule, MultiSelectDropdownComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
@@ -27,6 +29,9 @@ export class DashboardComponent {
   itemsPerPage = 10;
   itemsPerPageList = itemsPerPageData;
   totalProduct: any;
+  countrList = countrNames;
+
+  selectedCountries: string[] = [];
   constructor() {}
 
   readExcel(event: any): void {
@@ -42,6 +47,7 @@ export class DashboardComponent {
       const sheet = workbook.Sheets[sheetName];
       const rawData = XLSX.utils.sheet_to_json(sheet);
       this.ExcelData = rawData.map(mapToProspect);
+
       this.ExcelData = removeDuplicateEmailsData(this.ExcelData);
       this.totalProduct = this.ExcelData.length;
     };
@@ -59,5 +65,11 @@ export class DashboardComponent {
   pageItems(event: Event) {
     const selectedValue = (event.target as HTMLSelectElement).value;
     this.itemsPerPage = +selectedValue;
+  }
+
+  onSelectionChange(selected: string[]) {
+    console.log('Selected values:', selected);
+    this.selectedCountries = selected;
+    console.log(this.selectedCountries);
   }
 }
