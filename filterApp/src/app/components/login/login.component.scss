@@ -1,0 +1,91 @@
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+.h-custom {
+  height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+  .h-custom {
+    height: 100%;
+  }
+}
+.container {
+  height: 100vh;
+  overflow-y: hidden !important;
+  .login-wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .login-btn {
+      background-color: #65d4d6;
+      color: white;
+    }
+
+    .form-control {
+      border: none;
+      border-bottom: 1px solid black;
+      border-radius: 0px;
+      padding: 0px 16px;
+    }
+    label {
+      color: #00000061;
+    }
+    input::placeholder {
+      font-size: 15px;
+    }
+    .form-label {
+      margin-bottom: 0px;
+    }
+
+    .validation {
+      min-height: 1.5rem;
+      color: red;
+      font-size: 14px;
+      p {
+        margin-bottom: 0px;
+      }
+    }
+
+    input.ng-invalid.ng-touched {
+      border-bottom: red 1px solid;
+    }
+    input {
+      font-size: 15px;
+    }
+    .passwordWrapper {
+      position: relative;
+      .eye-icon {
+        position: absolute;
+        top: 12px;
+        right: 15px;
+
+        cursor: pointer;
+        img {
+          height: 20px;
+          width: 20px;
+        }
+      }
+    }
+    .err-msg {
+      display: flex;
+      justify-content: center;
+
+      p {
+        text-align: center;
+        color: red;
+        background-color: rgb(195 55 55 / 11%);
+        width: 300px;
+        margin-bottom: 0px;
+      }
+    }
+    .login-banner {
+      max-width: 75%;
+    }
+  }
+}

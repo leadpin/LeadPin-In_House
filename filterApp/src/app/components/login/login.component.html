@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="row login-wrapper">
+    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+      <div
+        class="err-msg"
+        [style.visibility]="isInValid ? 'visible' : 'hidden'"
+      >
+        <p>Invalid username or password.</p>
+      </div>
+      <form [formGroup]="loginForm">
+        <div class="form-outline mb-1">
+          <label class="form-label">Username</label>
+
+          <input
+            type="email"
+            class="form-control form-control-lg"
+            placeholder="Enter a valid email address"
+            formControlName="userName"
+          />
+          <div class="validation">
+            <div
+              *ngIf="
+                loginForm.get('userName')?.invalid &&
+                loginForm.get('userName')?.touched
+              "
+            >
+              <p *ngIf="loginForm.get('userName')?.errors?.['required']">
+                User Name is required.
+              </p>
+              <p *ngIf="loginForm.get('userName')?.errors?.['email']">
+                Inavalid Email Adderess..
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <div class="passwordWrapper">
+            <input
+              id="mypass"
+              [type]="passInputType"
+              class="form-control form-control-lg"
+              placeholder="Enter password"
+              formControlName="password"
+            />
+            <div class="eye-icon" (click)="tyepeChange()">
+              <img
+                *ngIf="passInputType == 'password'"
+                src="../assets/images/login_page/eye_open.png"
+              />
+              <img
+                *ngIf="passInputType == 'text'"
+                src="../assets/images/login_page/eye_close.png"
+              />
+            </div>
+          </div>
+
+          <div
+            class="validation"
+            *ngIf="
+              loginForm.get('password')?.invalid &&
+              loginForm.get('password')?.touched
+            "
+          >
+            <div *ngIf="loginForm.get('password')?.errors?.['required']">
+              Password is required.
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="d-flex justify-content-between align-items-center">
+            <div class="form-check mb-0">
+              <input
+                class="form-check-input me-2"
+                type="checkbox"
+                value=""
+                id="form2Example3"
+              />
+              <label class="form-check-label" for="form2Example3">
+                Remember me
+              </label>
+            </div>
+            <a href="#!" class="text-body">Forgot password?</a>
+          </div> -->
+
+        <div class="text-center text-lg-start mt-4 pt-2">
+          <button
+            type="submit"
+            class="btn login-btn btn-lg"
+            style="padding-left: 2.5rem; padding-right: 2.5rem"
+            (click)="login()"
+            [disabled]="!loginForm.valid"
+          >
+            Login
+          </button>
+          <p class="small fw-bold mt-2 pt-1 mb-0">
+            Don't have an account?
+            <a class="link-danger">Register</a>
+          </p>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-9 col-lg-6 col-xl-5">
+      <img
+        src="../assets/images/login_page/login-page.svg"
+        class="login-banner"
+        alt="Sample image"
+      />
+    </div>
+  </div>
+</div>

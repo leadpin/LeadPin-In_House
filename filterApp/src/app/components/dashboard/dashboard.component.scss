@@ -1,0 +1,57 @@
+.dashboard {
+  // background-color: rgb(196 208 208);
+  // height: 100vh;
+  margin-bottom: 50px;
+  .filter-wrapper {
+    border: 1px solid black;
+    h1 {
+      height: 100%;
+    }
+  }
+  .data-wrapper {
+    overflow-x: auto;
+    .form-select {
+      width: 150px;
+    }
+    .data-table {
+      tr,
+      th,
+      td {
+        border: 1px solid rgb(66, 67, 67);
+        // background-color: rgb(195, 234, 234);
+      }
+      th {
+        font-size: 14px;
+      }
+      td {
+        font-size: 12px;
+      }
+      .xxsm-width {
+        min-width: 58px;
+      }
+      .xsm-width {
+        min-width: 80px;
+      }
+      .sm-width {
+        min-width: 120px;
+      }
+      .m-width {
+        min-width: 200px;
+      }
+      tr {
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      td {
+        min-width: 300px;
+      }
+    }
+    .load-file {
+      text-align: center;
+      h2 {
+        color: #ae9898;
+      }
+    }
+  }
+}
