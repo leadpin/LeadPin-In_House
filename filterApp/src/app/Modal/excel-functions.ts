@@ -41,3 +41,15 @@ export function mapFieldNames(data: IExcelData[]) {
     'Prospect Location': item.prospectLocation,
   }));
 }
+
+export function removeDuplicateEmailsData(excelData: IExcelData[]) {
+  const seenEmails = new Set();
+  const uniqueObjects = excelData.filter((obj: any) => {
+    if (!seenEmails.has(obj.email)) {
+      seenEmails.add(obj.email);
+      return true; // Keep this object
+    }
+    return false; // Discard this object (duplicate email)
+  });
+  return uniqueObjects;
+}

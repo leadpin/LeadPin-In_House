@@ -2,7 +2,11 @@ import { Component } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { IExcelData } from '../../Modal/excel-interface';
 import { CommonModule } from '@angular/common';
-import { mapFieldNames, mapToProspect } from '../../Modal/excel-functions';
+import {
+  mapFieldNames,
+  mapToProspect,
+  removeDuplicateEmailsData,
+} from '../../Modal/excel-functions';
 import {
   itemsPerPageData,
   tableFieldsNames,
@@ -38,34 +42,12 @@ export class DashboardComponent {
       const sheet = workbook.Sheets[sheetName];
       const rawData = XLSX.utils.sheet_to_json(sheet);
       this.ExcelData = rawData.map(mapToProspect);
+      this.ExcelData = removeDuplicateEmailsData(this.ExcelData);
       this.totalProduct = this.ExcelData.length;
-
-      // this.totalProduct = this.removeDuplicates();
-      console.log(this.ExcelData);
     };
 
     fileReader.readAsArrayBuffer(file);
-
-    // this.ExcelData=this.ExcelData.filter((item:IExcelData)=>{
-    // })
   }
-
-  // removeDuplicates(data: any, key: any) {
-  //   return console.log([
-  //     ...new Map(data.map((x: any) => [key(x), x])).values(),
-  //   ]);
-  // }
-
-  // removeDuplicates() {
-  //   const uniqueArray = this.ExcelData.reduce((acc, current) => {
-  //     const x = acc.find((item: any) => item.email === current.email);
-  //     if (!x) {
-  //       return acc.concat([current]);
-  //     } else {
-  //       return acc;
-  //     }
-  //   }, []);
-  // }
 
   exportExcel() {
     const exportData = mapFieldNames(this.ExcelData);
@@ -77,6 +59,5 @@ export class DashboardComponent {
   pageItems(event: Event) {
     const selectedValue = (event.target as HTMLSelectElement).value;
     this.itemsPerPage = +selectedValue;
-    console.log(selectedValue);
   }
 }
