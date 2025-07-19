@@ -18,7 +18,7 @@ export class MultiSelectDropdownComponent {
   @Input() options: string[] = [];
   @Input() selectedItems: string[] = [];
   @Output() selectionChanged = new EventEmitter<string[]>();
-
+  @Input() disabled: boolean = false;
   dropdownOpen = false;
   constructor(private _eref: ElementRef) {}
   toggleDropdown() {

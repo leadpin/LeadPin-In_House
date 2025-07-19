@@ -1,4 +1,4 @@
-<div class="dropdown-container">
+<div class="dropdown-container" [class.disabled]="disabled">
   <button (click)="toggleDropdown()" class="dropdown-button">
     {{ selectedItems.length > 0 ? selectedItems.join(", ") : "Select Country" }}
     <span class="icon-wrapper">

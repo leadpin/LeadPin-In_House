@@ -12,6 +12,7 @@
         [options]="countrList"
         [selectedItems]="selectedCountries"
         (selectionChanged)="onSelectedCountry($event)"
+        [disabled]="!isFileUploaded"
       >
       </app-multi-select-dropdown>
     </div>

@@ -32,6 +32,7 @@ export class DashboardComponent {
   countrList = countrNames;
 
   selectedCountries: string[] = [];
+  isFileUploaded = false;
   constructor() {}
 
   readExcel(event: any): void {
@@ -51,6 +52,7 @@ export class DashboardComponent {
       this.ExcelData = removeDuplicateEmailsData(this.ExcelData);
       this.totalProduct = this.ExcelData.length;
       this.tempExcelData = this.ExcelData;
+      this.isFileUploaded = true;
     };
 
     fileReader.readAsArrayBuffer(file);

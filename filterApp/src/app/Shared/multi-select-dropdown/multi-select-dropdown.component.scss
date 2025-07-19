@@ -1,7 +1,10 @@
 .dropdown-container {
   position: relative;
   width: 200px;
-
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+  }
   .dropdown-button {
     width: 100%;
     padding: 8px;
