@@ -244,4 +244,6 @@ export const jobTitles: string[] = [
   'legal advisor',
   'administrative assistant',
   'office manager',
+  'it manager',
+  'Head of IT Infrastructure',
 ];

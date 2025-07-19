@@ -47,11 +47,6 @@ export class InputSelecterComponent {
     this.selectionChanged.emit(this.selectedItems);
   }
 
-  // removeTag(item: string) {
-  //   this.selectedItems = this.selectedItems.filter((i) => i !== item);
-  //   this.selectionChanged.emit(this.selectedItems);
-  // }
-
   setSearch(value: string) {
     this.searchTerm.set(value);
     this.toggleDropdown(true);
@@ -64,6 +59,11 @@ export class InputSelecterComponent {
         !this.selectedItems.includes(opt)
     )
   );
+
+  clearSelection() {
+    this.selectedItems = [];
+    this.selectionChanged.emit(this.selectedItems);
+  }
 
   @HostListener('document:click', ['$event'])
   handleOutsideClick(event: Event) {

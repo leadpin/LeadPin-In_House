@@ -39,6 +39,9 @@ export class DashboardComponent {
   selectedCountries: string[] = [];
   isFileUploaded = false;
   jobTitles: string[] = [];
+
+  jobs = jobTitles;
+  selectedJob: string[] = [];
   constructor() {}
 
   readExcel(event: any): void {
@@ -78,45 +81,46 @@ export class DashboardComponent {
 
   onSelectedCountry(selectedVal: string[]) {
     this.selectedCountries = selectedVal;
-    if (this.selectedCountries.length > 0) {
-      this.ExcelData = this.tempExcelData.filter((item) => {
-        const lowerCaseExlCountry = item.country.toLowerCase();
-
-        return this.selectedCountries.some((countryArr) => {
-          const lowerCaseCountrArr = countryArr.toLowerCase();
-          return lowerCaseExlCountry.includes(lowerCaseCountrArr);
-        });
-      });
-    } else {
-      this.ExcelData = this.tempExcelData;
-    }
+    this.applyCombinedFilters();
   }
-  clearfilter() {
-    this.selectedCountries = [];
-    this.onSelectedCountry(this.selectedCountries);
-  }
-
-  findJob() {
-    const jobTitles = document.getElementById('job-title');
-    const text = (jobTitles as HTMLInputElement).value;
-    console.log(text);
-  }
-
-  jobs = jobTitles;
-  selectedJob: string[] = [];
 
   onJobChange(selected: string[]) {
     this.selectedJob = [...selected];
-    console.log('Selected Countries:', this.selectedJob);
+    this.applyCombinedFilters();
+  }
+
+  applyCombinedFilters() {
+    this.ExcelData = this.tempExcelData.filter((item) => {
+      const itemCountry = item.country.toLowerCase();
+      const itemJob = item.jobTitle.toLowerCase();
+
+      const countryMatch =
+        this.selectedCountries.length === 0 ||
+        this.selectedCountries.some((country) =>
+          itemCountry.includes(country.toLowerCase())
+        );
+
+      const jobMatch =
+        this.selectedJob.length === 0 ||
+        this.selectedJob.some((job) => itemJob.includes(job.toLowerCase()));
+
+      return countryMatch && jobMatch;
+    });
+
+    this.totalProduct = this.ExcelData.length;
+  }
+  clearfilter() {
+    this.selectedCountries = [];
+    this.applyCombinedFilters();
   }
 
   removeTag(item: string, filterType: string) {
     if (filterType == 'country') {
       this.selectedCountries = this.selectedCountries.filter((i) => i !== item);
-      this.onSelectedCountry(this.selectedCountries);
+      this.applyCombinedFilters();
     } else if (filterType == 'job-title') {
       this.selectedJob = this.selectedJob.filter((i) => i !== item);
-      this.onJobChange(this.selectedJob);
+      this.applyCombinedFilters();
     }
   }
 }

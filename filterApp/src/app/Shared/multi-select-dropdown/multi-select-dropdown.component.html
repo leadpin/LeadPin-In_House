@@ -1,6 +1,6 @@
 <div class="dropdown-container" [class.disabled]="disabled">
   <button (click)="toggleDropdown()" class="dropdown-button">
-    {{ "Select Country" }}
+    Select Country
     <span class="icon-wrapper">
       <img
         class="arrow-icon"
@@ -11,13 +11,11 @@
   </button>
 
   <div class="dropdown-list" *ngIf="dropdownOpen">
-    <label *ngFor="let option of options" class="dropdown-item">
-      <input
-        class="input-box"
-        type="checkbox"
-        [checked]="isSelected(option)"
-        (change)="toggleSelection(option)"
-      />
+    <label
+      *ngFor="let option of options"
+      class="dropdown-item"
+      (click)="toggleSelection(option)"
+    >
       {{ option }}
     </label>
   </div>

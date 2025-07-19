@@ -10,7 +10,7 @@
   />
 
   <!-- Dropdown List -->
-  <div class="dropdown-list" *ngIf="dropdownOpen && filteredOptions().length">
+  <!-- <div class="dropdown-list" *ngIf="dropdownOpen && filteredOptions().length">
     <label *ngFor="let option of filteredOptions()" class="dropdown-item">
       <input
         class="input-box"
@@ -20,5 +20,18 @@
       />
       {{ option }}
     </label>
+  </div> -->
+
+  <div class="dropdown-list" *ngIf="dropdownOpen && filteredOptions().length">
+    <div class="dropdown-item clear-all" (click)="clearSelection()">
+      ✖ Clear All
+    </div>
+    <div
+      *ngFor="let option of filteredOptions()"
+      class="dropdown-item"
+      (click)="addOrRemove(option)"
+    >
+      {{ option }}
+    </div>
   </div>
 </div>

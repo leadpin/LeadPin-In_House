@@ -20,7 +20,9 @@ export class MultiSelectDropdownComponent {
   @Output() selectionChanged = new EventEmitter<string[]>();
   @Input() disabled: boolean = false;
   dropdownOpen = false;
+
   constructor(private _eref: ElementRef) {}
+
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
   }
@@ -35,10 +37,6 @@ export class MultiSelectDropdownComponent {
     } else {
       this.selectedItems.push(option);
     }
-    this.selectionChanged.emit(this.selectedItems);
-  }
-  removeTag(item: string) {
-    this.selectedItems = this.selectedItems.filter((i) => i !== item);
     this.selectionChanged.emit(this.selectedItems);
   }
 
