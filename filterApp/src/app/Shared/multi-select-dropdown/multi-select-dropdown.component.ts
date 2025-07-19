@@ -37,6 +37,10 @@ export class MultiSelectDropdownComponent {
     }
     this.selectionChanged.emit(this.selectedItems);
   }
+  removeTag(item: string) {
+    this.selectedItems = this.selectedItems.filter((i) => i !== item);
+    this.selectionChanged.emit(this.selectedItems);
+  }
 
   @HostListener('document:click', ['$event'])
   handleOutsideClick(event: Event) {

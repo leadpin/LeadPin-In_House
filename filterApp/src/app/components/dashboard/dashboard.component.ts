@@ -12,11 +12,17 @@ import {
   tableFieldsNames,
 } from '../../Modal/excel-constants';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { countrNames } from '../../../constants/filters';
+import { countrNames, jobTitles } from '../../../constants/filters';
 import { MultiSelectDropdownComponent } from '../../Shared/multi-select-dropdown/multi-select-dropdown.component';
+import { InputSelecterComponent } from '../../Shared/input-selecter/input-selecter.component';
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, NgxPaginationModule, MultiSelectDropdownComponent],
+  imports: [
+    CommonModule,
+    NgxPaginationModule,
+    MultiSelectDropdownComponent,
+    InputSelecterComponent,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
@@ -29,10 +35,10 @@ export class DashboardComponent {
   itemsPerPage = 10;
   itemsPerPageList = itemsPerPageData;
   totalProduct: any;
-  countrList = countrNames;
-
+  countryList = countrNames;
   selectedCountries: string[] = [];
   isFileUploaded = false;
+  jobTitles: string[] = [];
   constructor() {}
 
   readExcel(event: any): void {
@@ -83,6 +89,34 @@ export class DashboardComponent {
       });
     } else {
       this.ExcelData = this.tempExcelData;
+    }
+  }
+  clearfilter() {
+    this.selectedCountries = [];
+    this.onSelectedCountry(this.selectedCountries);
+  }
+
+  findJob() {
+    const jobTitles = document.getElementById('job-title');
+    const text = (jobTitles as HTMLInputElement).value;
+    console.log(text);
+  }
+
+  jobs = jobTitles;
+  selectedJob: string[] = [];
+
+  onJobChange(selected: string[]) {
+    this.selectedJob = [...selected];
+    console.log('Selected Countries:', this.selectedJob);
+  }
+
+  removeTag(item: string, filterType: string) {
+    if (filterType == 'country') {
+      this.selectedCountries = this.selectedCountries.filter((i) => i !== item);
+      this.onSelectedCountry(this.selectedCountries);
+    } else if (filterType == 'job-title') {
+      this.selectedJob = this.selectedJob.filter((i) => i !== item);
+      this.onJobChange(this.selectedJob);
     }
   }
 }
