@@ -22,7 +22,7 @@ import { MultiSelectDropdownComponent } from '../../Shared/multi-select-dropdown
 })
 export class DashboardComponent {
   ExcelData!: IExcelData[];
-
+  tempExcelData!: IExcelData[];
   fileName = 'Excel-Sheet.xlsx';
   tableFields = tableFieldsNames;
   pageNumber = 1;
@@ -50,6 +50,7 @@ export class DashboardComponent {
 
       this.ExcelData = removeDuplicateEmailsData(this.ExcelData);
       this.totalProduct = this.ExcelData.length;
+      this.tempExcelData = this.ExcelData;
     };
 
     fileReader.readAsArrayBuffer(file);
@@ -67,9 +68,19 @@ export class DashboardComponent {
     this.itemsPerPage = +selectedValue;
   }
 
-  onSelectionChange(selected: string[]) {
-    console.log('Selected values:', selected);
-    this.selectedCountries = selected;
-    console.log(this.selectedCountries);
+  onSelectedCountry(selectedVal: string[]) {
+    this.selectedCountries = selectedVal;
+    if (this.selectedCountries.length > 0) {
+      this.ExcelData = this.tempExcelData.filter((item) => {
+        const lowerCaseExlCountry = item.country.toLowerCase();
+
+        return this.selectedCountries.some((countryArr) => {
+          const lowerCaseCountrArr = countryArr.toLowerCase();
+          return lowerCaseExlCountry.includes(lowerCaseCountrArr);
+        });
+      });
+    } else {
+      this.ExcelData = this.tempExcelData;
+    }
   }
 }

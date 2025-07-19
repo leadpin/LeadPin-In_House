@@ -43,6 +43,7 @@
       align-items: center;
       border-bottom: 1px solid black;
       width: 300px;
+      cursor: pointer;
       .input-box {
         height: 22px;
         width: 20px;
@@ -50,4 +51,7 @@
       }
     }
   }
+}
+.dropdown-item:hover {
+  background-color: #65d4d6;
 }
