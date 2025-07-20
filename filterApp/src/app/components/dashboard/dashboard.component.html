@@ -75,7 +75,7 @@
         </select>
       </div>
     </div>
-    <div class="data-table">
+    <!-- <div class="data-table">
       <table class="table table-bordered" id="table-data">
         <thead>
           <tr>
@@ -109,7 +109,9 @@
           </tr>
           } @empty {
           <tr>
-            <td colspan="16">Upload Table</td>
+            <td colspan="17" class="no-data">
+              <h1>No Data Found</h1>
+            </td>
           </tr>
           }
         </tbody>
@@ -121,7 +123,16 @@
           ></pagination-controls>
         </div>
       </div>
-    </div>
+    </div> -->
+
+    <app-excel-table
+      [tableFields]="tableFields"
+      [ExcelData]="ExcelData"
+      [pageNumber]="pageNumber"
+      [itemsPerPage]="itemsPerPage"
+    >
+    </app-excel-table>
+
     } @else{
     <div class="load-file">
       <h2>Upload Excel file.</h2>

@@ -15,9 +15,15 @@ import {
 import { itemsPerPageData } from '../../Modal/excel-constants';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { InputSelecterComponent } from '../../Shared/input-selecter/input-selecter.component';
+import { ExcelTableComponent } from '../excel-table/excel-table.component';
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, NgxPaginationModule, InputSelecterComponent],
+  imports: [
+    CommonModule,
+    NgxPaginationModule,
+    InputSelecterComponent,
+    ExcelTableComponent,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
