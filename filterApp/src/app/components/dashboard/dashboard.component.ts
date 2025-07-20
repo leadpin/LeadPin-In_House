@@ -3,6 +3,7 @@ import * as XLSX from 'xlsx';
 import { IExcelData } from '../../Modal/excel-interface';
 import { CommonModule } from '@angular/common';
 import {
+  getCompanies,
   getCountries,
   getJobTitles,
   mapFieldNames,
@@ -14,17 +15,10 @@ import {
   tableFieldsNames,
 } from '../../Modal/excel-constants';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { countrNames, jobTitles } from '../../../constants/filters';
-import { MultiSelectDropdownComponent } from '../../Shared/multi-select-dropdown/multi-select-dropdown.component';
 import { InputSelecterComponent } from '../../Shared/input-selecter/input-selecter.component';
 @Component({
   selector: 'app-dashboard',
-  imports: [
-    CommonModule,
-    NgxPaginationModule,
-    MultiSelectDropdownComponent,
-    InputSelecterComponent,
-  ],
+  imports: [CommonModule, NgxPaginationModule, InputSelecterComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
@@ -38,11 +32,13 @@ export class DashboardComponent {
   itemsPerPageList = itemsPerPageData;
   totalProduct: any;
   countryList: any = [];
-  jobTitles: any = [];
   selectedCountries: string[] = [];
-  isFileUploaded = false;
-
+  jobTitles: any = [];
   selectedJob: string[] = [];
+
+  companyNames: any = [];
+  selectedCompanies: string[] = [];
+  isFileUploaded = false;
   constructor() {}
 
   readExcel(event: any): void {
@@ -65,6 +61,7 @@ export class DashboardComponent {
       this.isFileUploaded = true;
       this.countryList = getCountries(this.ExcelData);
       this.jobTitles = getJobTitles(this.ExcelData);
+      this.companyNames = getCompanies(this.ExcelData);
     };
 
     fileReader.readAsArrayBuffer(file);
@@ -87,8 +84,12 @@ export class DashboardComponent {
     this.applyCombinedFilters();
   }
 
-  onJobChange(selected: string[]) {
-    this.selectedJob = [...selected];
+  onJobChange(selectedVal: string[]) {
+    this.selectedJob = [...selectedVal];
+    this.applyCombinedFilters();
+  }
+  onSelectedCompany(selectedVal: string[]) {
+    this.selectedCompanies = [...selectedVal];
     this.applyCombinedFilters();
   }
 
@@ -96,6 +97,7 @@ export class DashboardComponent {
     this.ExcelData = this.tempExcelData.filter((item) => {
       const itemCountry = item.country.toLowerCase();
       const itemJob = item.jobTitle.toLowerCase();
+      const itemCompany = item.companyName.toLowerCase();
 
       const countryMatch =
         this.selectedCountries.length === 0 ||
@@ -107,23 +109,32 @@ export class DashboardComponent {
         this.selectedJob.length === 0 ||
         this.selectedJob.some((job) => itemJob.includes(job.toLowerCase()));
 
-      return countryMatch && jobMatch;
+      const companyMatch =
+        this.selectedCompanies.length === 0 ||
+        this.selectedCompanies.some((company) =>
+          itemCompany.includes(company.toLowerCase())
+        );
+
+      return countryMatch && jobMatch && companyMatch;
     });
 
     this.totalProduct = this.ExcelData.length;
   }
-  clearfilter() {
-    this.selectedCountries = [];
-    this.applyCombinedFilters();
-  }
+  // clearfilter() {
+  //   this.selectedCountries = [];
+  //   this.applyCombinedFilters();
+  // }
 
-  removeTag(item: string, filterType: string) {
-    if (filterType == 'country') {
-      this.selectedCountries = this.selectedCountries.filter((i) => i !== item);
-      this.applyCombinedFilters();
-    } else if (filterType == 'job-title') {
-      this.selectedJob = this.selectedJob.filter((i) => i !== item);
-      this.applyCombinedFilters();
-    }
-  }
+  // removeTag(item: string, filterType: string) {
+  //   if (filterType == 'country') {
+  //     this.selectedCountries = this.selectedCountries.filter((i) => i !== item);
+  //     this.applyCombinedFilters();
+  //   } else if (filterType == 'job-title') {
+  //     this.selectedJob = this.selectedJob.filter((i) => i !== item);
+  //     this.applyCombinedFilters();
+  //   } else if (filterType == 'company') {
+  //     this.selectedCompanies = this.selectedCompanies.filter((i) => i !== item);
+  //     this.applyCombinedFilters();
+  //   }
+  // }
 }

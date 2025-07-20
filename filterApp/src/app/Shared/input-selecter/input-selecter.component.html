@@ -1,37 +1,42 @@
-<div class="multi-select-container" [class.disabled]="disabled">
-  <!-- Search Input -->
-  <input
-    type="text"
-    class="search-input"
-    [placeholder]="placeholder"
-    (input)="setSearch($any($event.target).value)"
-    (focus)="toggleDropdown(true)"
-    [disabled]="disabled"
+<div class="tags-container" *ngIf="filterItems.length > 0">
+  <span class="tag" *ngFor="let item of filterItems">
+    {{ item }}
+    <button type="button" (click)="addOrRemove(item)">×</button>
+  </span>
+</div>
+<div class="filter-container">
+  <img
+    [src]="imagePath + imageName + '.svg'"
+    class="filter-icon"
+    alt="country-icon"
+    srcset=""
   />
+  <div class="select-container" [class.disabled]="disabled">
+    <input
+      type="text"
+      class="search-input"
+      [placeholder]="placeholder"
+      (input)="setSearch($any($event.target).value)"
+      (focus)="toggleDropdown(true)"
+      [disabled]="disabled"
+    />
 
-  <!-- Dropdown List -->
-  <!-- <div class="dropdown-list" *ngIf="dropdownOpen && filteredOptions().length">
-    <label *ngFor="let option of filteredOptions()" class="dropdown-item">
-      <input
-        class="input-box"
-        type="checkbox"
-        [checked]="isSelected(option)"
-        (change)="addOrRemove(option)"
-      />
-      {{ option }}
-    </label>
-  </div> -->
+    <div class="dropdown-list" *ngIf="dropdownOpen && filteredOptions().length">
+      <div
+        *ngFor="let option of filteredOptions()"
+        class="dropdown-item"
+        (click)="addOrRemove(option)"
+      >
+        {{ option | titlecase }}
+      </div>
+    </div>
+  </div>
 
-  <div class="dropdown-list" *ngIf="dropdownOpen && filteredOptions().length">
-    <div class="dropdown-item clear-all" (click)="clearSelection()">
-      ✖ Clear All
-    </div>
-    <div
-      *ngFor="let option of filteredOptions()"
-      class="dropdown-item"
-      (click)="addOrRemove(option)"
-    >
-      {{ option }}
-    </div>
+  <div
+    class="close-icon"
+    *ngIf="filterItems.length > 0"
+    (click)="clearAllSelection()"
+  >
+    <img src="../assets/icons/close.png" alt="" srcset="" />
   </div>
 </div>

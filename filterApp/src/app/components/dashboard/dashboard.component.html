@@ -2,54 +2,37 @@
   <div class="col-3 filter-wrapper">
     <h1>Filters</h1>
 
-    <div class="tags-container" *ngIf="selectedCountries.length > 0">
-      <span class="tag" *ngFor="let item of selectedCountries">
-        {{ item }}
-        <button type="button" (click)="removeTag(item, 'country')">×</button>
-      </span>
-    </div>
-    <div class="filter-item">
-      <img
-        src="../assets/icons/country.svg"
-        class="filter-icon"
-        alt="country-icon"
-        srcset=""
-      />
-      <app-multi-select-dropdown
+    <div class="">
+      <app-input-selecter
+        [imageName]="'country'"
+        [filterItems]="selectedCountries"
+        [placeholder]="'Search Country'"
         [options]="countryList"
         [selectedItems]="selectedCountries"
         (selectionChanged)="onSelectedCountry($event)"
         [disabled]="!isFileUploaded"
       >
-      </app-multi-select-dropdown>
-      <!-- <span *ngIf="selectedCountries.length > 0">
-        <img src="../assets/icons/close.png" (click)="clearfilter()" />
-      </span> -->
-    </div>
-    <div class="tags-container" *ngIf="selectedJob.length > 0">
-      <span class="tag" *ngFor="let item of selectedJob">
-        {{ item }}
-        <button type="button" (click)="removeTag(item, 'job-title')">×</button>
-      </span>
-    </div>
-
-    <div class="filter-item">
-      <img
-        src="../assets/icons/job.svg"
-        class="filter-icon"
-        alt="country-icon"
-        srcset=""
-      />
+      </app-input-selecter>
       <app-input-selecter
+        [imageName]="'job'"
+        [filterItems]="selectedJob"
+        [placeholder]="'Search Job Title'"
         [options]="jobTitles"
         [selectedItems]="selectedJob"
         (selectionChanged)="onJobChange($event)"
         [disabled]="!isFileUploaded"
       >
       </app-input-selecter>
-      <!-- <span *ngIf="selectedCountries.length > 0">
-        <img src="../assets/icons/close.png" (click)="clearfilter()" />
-      </span> -->
+      <app-input-selecter
+        [imageName]="'company-icon'"
+        [filterItems]="selectedCompanies"
+        [placeholder]="'Search Company'"
+        [options]="companyNames"
+        [selectedItems]="selectedCompanies"
+        (selectionChanged)="onSelectedCompany($event)"
+        [disabled]="!isFileUploaded"
+      >
+      </app-input-selecter>
     </div>
   </div>
   <div class="col-9 data-wrapper">

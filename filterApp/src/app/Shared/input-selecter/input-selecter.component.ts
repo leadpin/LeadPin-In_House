@@ -18,10 +18,14 @@ import {
 })
 export class InputSelecterComponent {
   @Input() options: string[] = [];
+
+  @Input() filterItems: string[] = [];
   @Input() selectedItems: string[] = [];
-  @Input() placeholder: string = 'Search and select...';
+  @Input() placeholder!: string;
   @Input() disabled: boolean = false;
   @Output() selectionChanged = new EventEmitter<string[]>();
+  @Input() imageName!: string;
+  imagePath: string = '../assets/icons/';
 
   searchTerm = signal('');
   dropdownOpen = false;
@@ -38,7 +42,7 @@ export class InputSelecterComponent {
     return this.selectedItems.includes(option);
   }
 
-  addOrRemove(option: string) {
+  addOrRemove(option: any) {
     if (this.isSelected(option)) {
       this.selectedItems = this.selectedItems.filter((item) => item !== option);
     } else {
@@ -60,7 +64,7 @@ export class InputSelecterComponent {
     )
   );
 
-  clearSelection() {
+  clearAllSelection() {
     this.selectedItems = [];
     this.selectionChanged.emit(this.selectedItems);
   }

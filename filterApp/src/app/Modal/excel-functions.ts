@@ -62,3 +62,8 @@ export function getJobTitles(data: any) {
   const josTitles = data.map((el: any) => el.jobTitle.toLowerCase());
   return [...new Set(josTitles)];
 }
+
+export function getCompanies(data: any) {
+  const companyNames = data.map((el: any) => el.companyName.toLowerCase());
+  return [...new Set(companyNames)];
+}

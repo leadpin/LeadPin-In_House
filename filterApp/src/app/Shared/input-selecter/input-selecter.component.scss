@@ -1,45 +1,86 @@
-.multi-select-container {
-  width: 250px;
-  position: relative;
+.tags-container {
+  // margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 4px;
+  background-color: white;
+  padding: 5px;
+  border-radius: 10px;
 
-  &.disabled {
-    pointer-events: none;
-    opacity: 0.6;
+  .tag {
+    background-color: #d0eaff;
+    padding: 0px 0px 2px 8px;
+    border-radius: 12px;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
   }
-  .search-input {
-    width: 100%;
-    padding: 6px 8px;
-    box-sizing: border-box;
+  button {
+    background: none;
     border: none;
-    border-radius: 10px;
+    font-size: 14px;
+    margin-left: 4px;
+    cursor: pointer;
   }
-  .dropdown-list {
-    position: absolute;
-    top: 100%;
-    z-index: 10;
-    background: #fff;
-    border: 1px solid #ccc;
-    max-height: 200px;
-    overflow-y: auto;
+}
+.filter-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 5px 0 15px;
+  .filter-icon {
+    width: 30px;
+    height: 30px;
+  }
+  .select-container {
+    width: 250px;
+    position: relative;
 
-    .dropdown-item {
-      padding: 5px 10px;
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid black;
-      width: 230px;
-      cursor: pointer;
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.6;
     }
-    .clear-all {
-      font-weight: bold;
-      color: #d9534f;
-      cursor: pointer;
+    .search-input {
+      width: 100%;
+      padding: 6px 8px;
+      box-sizing: border-box;
+      border: none;
+      border-radius: 10px;
+    }
+    .dropdown-list {
+      position: absolute;
+      top: 100%;
+      z-index: 10;
+      background: #fff;
+      border: 1px solid #ccc;
+      max-height: 200px;
+      width: 250px;
+      overflow-y: auto;
+      overflow-x: auto;
+
+      .dropdown-item {
+        font-size: 11px;
+        padding: 5px 10px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid black;
+        width: 250px;
+        cursor: pointer;
+      }
     }
   }
-}
-.dropdown-item:hover {
-  background-color: #bcc2c2;
-}
-.search-input:focus-visible {
-  outline: none;
+  .close-icon {
+    cursor: pointer;
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .dropdown-item:hover {
+    background-color: #bcc2c2;
+  }
+  .search-input:focus-visible {
+    outline: none;
+  }
 }
