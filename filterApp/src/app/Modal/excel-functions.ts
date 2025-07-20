@@ -77,3 +77,8 @@ export function getIndustries(data: any) {
   const industryNames = data.map((el: any) => el.industry.toLowerCase());
   return [...new Set(industryNames)];
 }
+
+export function getCities(data: any) {
+  const cityNames = data.map((el: any) => el.city.toLowerCase());
+  return [...new Set(cityNames)];
+}

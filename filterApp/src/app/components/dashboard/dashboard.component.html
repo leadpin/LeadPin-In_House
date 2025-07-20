@@ -46,6 +46,17 @@
         [disabled]="!isFileUploaded"
       >
       </app-input-selecter>
+
+      <app-input-selecter
+        [imageName]="'city-icon'"
+        [filterItems]="selectedCities"
+        [placeholder]="'Search by City'"
+        [options]="cityNames"
+        [selectedItems]="selectedCities"
+        (selectionChanged)="onSelectedCity($event)"
+        [disabled]="!isFileUploaded"
+      >
+      </app-input-selecter>
     </div>
   </div>
   <div class="col-9 data-wrapper">

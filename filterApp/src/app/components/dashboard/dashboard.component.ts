@@ -4,6 +4,7 @@ import { IExcelData } from '../../Modal/excel-interface';
 import { CommonModule } from '@angular/common';
 import {
   convertFieldNames,
+  getCities,
   getCompanies,
   getCountries,
   getIndustries,
@@ -42,9 +43,11 @@ export class DashboardComponent {
   selectedJob: string[] = [];
   companyNames: any = [];
   selectedCompanies: string[] = [];
-
   industryNames: any = [];
   selectedIndustries: string[] = [];
+
+  cityNames: any = [];
+  selectedCities: string[] = [];
 
   isFileUploaded = false;
   constructor() {}
@@ -72,6 +75,7 @@ export class DashboardComponent {
       this.jobTitles = getJobTitles(this.ExcelData);
       this.companyNames = getCompanies(this.ExcelData);
       this.industryNames = getIndustries(this.ExcelData);
+      this.cityNames = getCities(this.ExcelData);
     };
 
     fileReader.readAsArrayBuffer(file);
@@ -108,12 +112,18 @@ export class DashboardComponent {
     this.applyCombinedFilters();
   }
 
+  onSelectedCity(selectedVal: string[]) {
+    this.selectedCities = [...selectedVal];
+    this.applyCombinedFilters();
+  }
+
   applyCombinedFilters() {
     this.ExcelData = this.tempExcelData.filter((item) => {
       const itemCountry = item.country.toLowerCase();
       const itemJob = item.jobTitle.toLowerCase();
       const itemCompany = item.companyName.toLowerCase();
       const itemIndustry = item.industry.toLowerCase();
+      const itemCity = item.city.toLowerCase();
 
       const countryMatch =
         this.selectedCountries.length === 0 ||
@@ -137,7 +147,15 @@ export class DashboardComponent {
           itemIndustry.includes(industry.toLowerCase())
         );
 
-      return countryMatch && jobMatch && companyMatch && industryMatch;
+      const cityMatch =
+        this.selectedCities.length === 0 ||
+        this.selectedCities.some((city) =>
+          itemCity.includes(city.toLowerCase())
+        );
+
+      return (
+        countryMatch && jobMatch && companyMatch && industryMatch && cityMatch
+      );
     });
 
     this.totalProduct = this.ExcelData.length;

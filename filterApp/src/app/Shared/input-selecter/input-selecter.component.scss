@@ -1,34 +1,33 @@
 .tags-container {
-  // margin-top: 15px;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 4px;
   background-color: white;
   padding: 5px;
   border-radius: 10px;
 
   .tag {
     background-color: #d0eaff;
-    padding: 0px 0px 2px 8px;
+    padding: 0px 8px 2px 8px;
     border-radius: 12px;
     font-size: 14px;
     display: inline-flex;
-    align-items: center;
-  }
-  button {
-    background: none;
-    border: none;
-    font-size: 14px;
-    margin-left: 4px;
-    cursor: pointer;
+    align-items: flex-start;
+
+    img {
+      margin-left: 12px;
+      width: 8px;
+      height: 8px;
+      margin-top: 5px;
+      cursor: pointer;
+    }
   }
 }
 .filter-container {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  margin: 5px 0 15px;
+  margin: 5px 0 20px;
   .filter-icon {
     width: 30px;
     height: 30px;
@@ -60,7 +59,7 @@
       overflow-x: auto;
 
       .dropdown-item {
-        font-size: 11px;
+        font-size: 12px;
         padding: 5px 10px;
         display: flex;
         align-items: center;
@@ -73,8 +72,8 @@
   .close-icon {
     cursor: pointer;
     img {
-      width: 20px;
-      height: 20px;
+      width: 15px;
+      height: 15px;
     }
   }
   .dropdown-item:hover {

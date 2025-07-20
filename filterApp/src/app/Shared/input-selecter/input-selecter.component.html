@@ -1,7 +1,12 @@
 <div class="tags-container" *ngIf="filterItems.length > 0">
   <span class="tag" *ngFor="let item of filterItems">
     {{ item }}
-    <button type="button" (click)="addOrRemove(item)">×</button>
+
+    <img
+      src="../assets/icons/close-tag.png"
+      alt="close-img"
+      (click)="addOrRemove(item)"
+    />
   </span>
 </div>
 <div class="filter-container">
@@ -37,6 +42,6 @@
     *ngIf="filterItems.length > 0"
     (click)="clearAllSelection()"
   >
-    <img src="../assets/icons/close.png" alt="" srcset="" />
+    <img src="../assets/icons/close.png" alt="close-img" />
   </div>
 </div>
