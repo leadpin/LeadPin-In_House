@@ -81,7 +81,7 @@
           <tr>
             <th>Sr No.</th>
             @for (item of tableFields; track item) {
-            <th>{{ item }}</th>
+            <th>{{ item | titlecase }}</th>
             }
           </tr>
         </thead>

@@ -3,6 +3,7 @@ import * as XLSX from 'xlsx';
 import { IExcelData } from '../../Modal/excel-interface';
 import { CommonModule } from '@angular/common';
 import {
+  convertFieldNames,
   getCompanies,
   getCountries,
   getIndustries,
@@ -11,10 +12,7 @@ import {
   mapToProspect,
   removeDuplicateEmailsData,
 } from '../../Modal/excel-functions';
-import {
-  itemsPerPageData,
-  tableFieldsNames,
-} from '../../Modal/excel-constants';
+import { itemsPerPageData } from '../../Modal/excel-constants';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { InputSelecterComponent } from '../../Shared/input-selecter/input-selecter.component';
 @Component({
@@ -27,7 +25,7 @@ export class DashboardComponent {
   ExcelData!: IExcelData[];
   tempExcelData!: IExcelData[];
   fileName = 'Excel-Sheet.xlsx';
-  tableFields = tableFieldsNames;
+  tableFields!: string[];
   pageNumber = 1;
   itemsPerPage = 10;
   itemsPerPageList = itemsPerPageData;
@@ -63,6 +61,7 @@ export class DashboardComponent {
       this.totalProduct = this.ExcelData.length;
       this.tempExcelData = this.ExcelData;
       this.isFileUploaded = true;
+      this.tableFields = convertFieldNames(this.ExcelData);
       this.countryList = getCountries(this.ExcelData);
       this.jobTitles = getJobTitles(this.ExcelData);
       this.companyNames = getCompanies(this.ExcelData);

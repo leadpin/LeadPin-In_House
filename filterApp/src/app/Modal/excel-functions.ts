@@ -54,6 +54,11 @@ export function removeDuplicateEmailsData(excelData: IExcelData[]) {
   return uniqueObjects;
 }
 
+export function convertFieldNames(data: any) {
+  const excelFieldNames = Object.keys(data[0]);
+  return excelFieldNames.map((item: any) => item.split(/(?=[A-Z])/).join(' '));
+}
+
 export function getCountries(data: any) {
   const countries = data.map((el: any) => el.country.toLowerCase());
   return [...new Set(countries)];
