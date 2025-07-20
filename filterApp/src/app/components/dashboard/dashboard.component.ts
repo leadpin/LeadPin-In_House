@@ -9,6 +9,7 @@ import {
   getCountries,
   getIndustries,
   getJobTitles,
+  getStates,
   mapFieldNames,
   mapToProspect,
   removeDuplicateEmailsData,
@@ -45,9 +46,11 @@ export class DashboardComponent {
   selectedCompanies: string[] = [];
   industryNames: any = [];
   selectedIndustries: string[] = [];
-
   cityNames: any = [];
   selectedCities: string[] = [];
+
+  stateNames: any = [];
+  selectedStates: string[] = [];
 
   isFileUploaded = false;
   constructor() {}
@@ -76,6 +79,7 @@ export class DashboardComponent {
       this.companyNames = getCompanies(this.ExcelData);
       this.industryNames = getIndustries(this.ExcelData);
       this.cityNames = getCities(this.ExcelData);
+      this.stateNames = getStates(this.ExcelData);
     };
 
     fileReader.readAsArrayBuffer(file);
@@ -112,6 +116,11 @@ export class DashboardComponent {
     this.applyCombinedFilters();
   }
 
+  onSelectedState(selectedVal: string[]) {
+    this.selectedStates = [...selectedVal];
+    this.applyCombinedFilters();
+  }
+
   onSelectedCity(selectedVal: string[]) {
     this.selectedCities = [...selectedVal];
     this.applyCombinedFilters();
@@ -124,6 +133,7 @@ export class DashboardComponent {
       const itemCompany = item.companyName.toLowerCase();
       const itemIndustry = item.industry.toLowerCase();
       const itemCity = item.city.toLowerCase();
+      const itemState = item.state.toLowerCase();
 
       const countryMatch =
         this.selectedCountries.length === 0 ||
@@ -153,8 +163,19 @@ export class DashboardComponent {
           itemCity.includes(city.toLowerCase())
         );
 
+      const stateMatch =
+        this.selectedStates.length === 0 ||
+        this.selectedStates.some((state) =>
+          itemState.includes(state.toLowerCase())
+        );
+
       return (
-        countryMatch && jobMatch && companyMatch && industryMatch && cityMatch
+        countryMatch &&
+        jobMatch &&
+        companyMatch &&
+        industryMatch &&
+        cityMatch &&
+        stateMatch
       );
     });
 

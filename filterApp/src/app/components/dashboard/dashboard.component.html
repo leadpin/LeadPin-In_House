@@ -48,6 +48,17 @@
       </app-input-selecter>
 
       <app-input-selecter
+        [imageName]="'state-icon'"
+        [filterItems]="selectedStates"
+        [placeholder]="'Search by State'"
+        [options]="stateNames"
+        [selectedItems]="selectedStates"
+        (selectionChanged)="onSelectedState($event)"
+        [disabled]="!isFileUploaded"
+      >
+      </app-input-selecter>
+
+      <app-input-selecter
         [imageName]="'city-icon'"
         [filterItems]="selectedCities"
         [placeholder]="'Search by City'"

@@ -4,46 +4,18 @@
   .filter-wrapper {
     border: 1px solid black;
     background-color: #65d4d6;
+    h1 {
+      text-align: center;
+      color: white;
+      margin: 15px 0px;
+    }
   }
   .data-wrapper {
     overflow-x: auto;
     .form-select {
       width: 150px;
     }
-    // .data-table {
-    //   tr {
-    //     text-align: center;
-    //     vertical-align: middle;
-    //   }
-    //   tr,
-    //   th,
-    //   td {
-    //     border: 1px solid rgb(66, 67, 67);
-    //   }
-    //   th {
-    //     font-size: 14px;
-    //   }
-    //   td {
-    //     font-size: 12px;
-    //     min-width: 300px;
-    //   }
-    //   .xxsm-width {
-    //     min-width: 58px;
-    //   }
-    //   .xsm-width {
-    //     min-width: 80px;
-    //   }
-    //   .sm-width {
-    //     min-width: 120px;
-    //   }
-    //   .m-width {
-    //     min-width: 200px;
-    //   }
-    //   .no-data {
-    //     height: 200px;
-    //     color: rgb(170, 166, 166);
-    //   }
-    // }
+
     .load-file {
       text-align: center;
       h2 {
