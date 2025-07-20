@@ -6,30 +6,43 @@
       <app-input-selecter
         [imageName]="'country'"
         [filterItems]="selectedCountries"
-        [placeholder]="'Search Country'"
+        [placeholder]="'Search by Country'"
         [options]="countryList"
         [selectedItems]="selectedCountries"
         (selectionChanged)="onSelectedCountry($event)"
         [disabled]="!isFileUploaded"
       >
       </app-input-selecter>
+
       <app-input-selecter
         [imageName]="'job'"
         [filterItems]="selectedJob"
-        [placeholder]="'Search Job Title'"
+        [placeholder]="'Search by Job Title'"
         [options]="jobTitles"
         [selectedItems]="selectedJob"
         (selectionChanged)="onJobChange($event)"
         [disabled]="!isFileUploaded"
       >
       </app-input-selecter>
+
       <app-input-selecter
         [imageName]="'company-icon'"
         [filterItems]="selectedCompanies"
-        [placeholder]="'Search Company'"
+        [placeholder]="'Search by Company'"
         [options]="companyNames"
         [selectedItems]="selectedCompanies"
         (selectionChanged)="onSelectedCompany($event)"
+        [disabled]="!isFileUploaded"
+      >
+      </app-input-selecter>
+
+      <app-input-selecter
+        [imageName]="'industry-icon'"
+        [filterItems]="selectedIndustries"
+        [placeholder]="'Search by Industry'"
+        [options]="industryNames"
+        [selectedItems]="selectedIndustries"
+        (selectionChanged)="onSelectedIndustry($event)"
         [disabled]="!isFileUploaded"
       >
       </app-input-selecter>

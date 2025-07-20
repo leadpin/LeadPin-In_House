@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import {
   getCompanies,
   getCountries,
+  getIndustries,
   getJobTitles,
   mapFieldNames,
   mapToProspect,
@@ -35,9 +36,12 @@ export class DashboardComponent {
   selectedCountries: string[] = [];
   jobTitles: any = [];
   selectedJob: string[] = [];
-
   companyNames: any = [];
   selectedCompanies: string[] = [];
+
+  industryNames: any = [];
+  selectedIndustries: string[] = [];
+
   isFileUploaded = false;
   constructor() {}
 
@@ -62,6 +66,7 @@ export class DashboardComponent {
       this.countryList = getCountries(this.ExcelData);
       this.jobTitles = getJobTitles(this.ExcelData);
       this.companyNames = getCompanies(this.ExcelData);
+      this.industryNames = getIndustries(this.ExcelData);
     };
 
     fileReader.readAsArrayBuffer(file);
@@ -93,11 +98,17 @@ export class DashboardComponent {
     this.applyCombinedFilters();
   }
 
+  onSelectedIndustry(selectedVal: string[]) {
+    this.selectedIndustries = [...selectedVal];
+    this.applyCombinedFilters();
+  }
+
   applyCombinedFilters() {
     this.ExcelData = this.tempExcelData.filter((item) => {
       const itemCountry = item.country.toLowerCase();
       const itemJob = item.jobTitle.toLowerCase();
       const itemCompany = item.companyName.toLowerCase();
+      const itemIndustry = item.industry.toLowerCase();
 
       const countryMatch =
         this.selectedCountries.length === 0 ||
@@ -115,26 +126,15 @@ export class DashboardComponent {
           itemCompany.includes(company.toLowerCase())
         );
 
-      return countryMatch && jobMatch && companyMatch;
+      const industryMatch =
+        this.selectedIndustries.length === 0 ||
+        this.selectedIndustries.some((industry) =>
+          itemIndustry.includes(industry.toLowerCase())
+        );
+
+      return countryMatch && jobMatch && companyMatch && industryMatch;
     });
 
     this.totalProduct = this.ExcelData.length;
   }
-  // clearfilter() {
-  //   this.selectedCountries = [];
-  //   this.applyCombinedFilters();
-  // }
-
-  // removeTag(item: string, filterType: string) {
-  //   if (filterType == 'country') {
-  //     this.selectedCountries = this.selectedCountries.filter((i) => i !== item);
-  //     this.applyCombinedFilters();
-  //   } else if (filterType == 'job-title') {
-  //     this.selectedJob = this.selectedJob.filter((i) => i !== item);
-  //     this.applyCombinedFilters();
-  //   } else if (filterType == 'company') {
-  //     this.selectedCompanies = this.selectedCompanies.filter((i) => i !== item);
-  //     this.applyCombinedFilters();
-  //   }
-  // }
 }

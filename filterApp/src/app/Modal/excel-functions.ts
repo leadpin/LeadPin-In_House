@@ -67,3 +67,8 @@ export function getCompanies(data: any) {
   const companyNames = data.map((el: any) => el.companyName.toLowerCase());
   return [...new Set(companyNames)];
 }
+
+export function getIndustries(data: any) {
+  const industryNames = data.map((el: any) => el.industry.toLowerCase());
+  return [...new Set(industryNames)];
+}
