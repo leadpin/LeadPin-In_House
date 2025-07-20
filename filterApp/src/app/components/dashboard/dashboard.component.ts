@@ -3,6 +3,8 @@ import * as XLSX from 'xlsx';
 import { IExcelData } from '../../Modal/excel-interface';
 import { CommonModule } from '@angular/common';
 import {
+  getCountries,
+  getJobTitles,
   mapFieldNames,
   mapToProspect,
   removeDuplicateEmailsData,
@@ -35,12 +37,11 @@ export class DashboardComponent {
   itemsPerPage = 10;
   itemsPerPageList = itemsPerPageData;
   totalProduct: any;
-  countryList = countrNames;
+  countryList: any = [];
+  jobTitles: any = [];
   selectedCountries: string[] = [];
   isFileUploaded = false;
-  jobTitles: string[] = [];
 
-  jobs = jobTitles;
   selectedJob: string[] = [];
   constructor() {}
 
@@ -62,6 +63,8 @@ export class DashboardComponent {
       this.totalProduct = this.ExcelData.length;
       this.tempExcelData = this.ExcelData;
       this.isFileUploaded = true;
+      this.countryList = getCountries(this.ExcelData);
+      this.jobTitles = getJobTitles(this.ExcelData);
     };
 
     fileReader.readAsArrayBuffer(file);

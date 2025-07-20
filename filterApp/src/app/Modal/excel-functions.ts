@@ -53,3 +53,12 @@ export function removeDuplicateEmailsData(excelData: IExcelData[]) {
   });
   return uniqueObjects;
 }
+
+export function getCountries(data: any) {
+  const countries = data.map((el: any) => el.country.toLowerCase());
+  return [...new Set(countries)];
+}
+export function getJobTitles(data: any) {
+  const josTitles = data.map((el: any) => el.jobTitle.toLowerCase());
+  return [...new Set(josTitles)];
+}
