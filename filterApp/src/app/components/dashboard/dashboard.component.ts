@@ -10,6 +10,7 @@ import {
   getIndustries,
   getJobTitles,
   getStates,
+  getZipCodes,
   mapFieldNames,
   mapToProspect,
   removeDuplicateEmailsData,
@@ -48,9 +49,11 @@ export class DashboardComponent {
   selectedIndustries: string[] = [];
   cityNames: any = [];
   selectedCities: string[] = [];
-
   stateNames: any = [];
   selectedStates: string[] = [];
+
+  zipCodes: any = [];
+  selectedZipCodes: string[] = [];
 
   isFileUploaded = false;
   constructor() {}
@@ -80,6 +83,7 @@ export class DashboardComponent {
       this.industryNames = getIndustries(this.ExcelData);
       this.cityNames = getCities(this.ExcelData);
       this.stateNames = getStates(this.ExcelData);
+      this.zipCodes = getZipCodes(this.ExcelData);
     };
 
     fileReader.readAsArrayBuffer(file);
@@ -126,14 +130,20 @@ export class DashboardComponent {
     this.applyCombinedFilters();
   }
 
+  onSelectedZipCode(selectedVal: any[]) {
+    this.selectedZipCodes = [...selectedVal];
+    this.applyCombinedFilters();
+  }
+
   applyCombinedFilters() {
     this.ExcelData = this.tempExcelData.filter((item) => {
       const itemCountry = item.country.toLowerCase();
       const itemJob = item.jobTitle.toLowerCase();
       const itemCompany = item.companyName.toLowerCase();
       const itemIndustry = item.industry.toLowerCase();
-      const itemCity = item.city.toLowerCase();
       const itemState = item.state.toLowerCase();
+      const itemCity = item.city.toLowerCase();
+      const itemZipCode = item.zipCode;
 
       const countryMatch =
         this.selectedCountries.length === 0 ||
@@ -169,13 +179,18 @@ export class DashboardComponent {
           itemState.includes(state.toLowerCase())
         );
 
+      const zipCodeMatch =
+        this.selectedZipCodes.length === 0 ||
+        this.selectedZipCodes.some((zipCode) => itemZipCode.includes(zipCode));
+
       return (
         countryMatch &&
         jobMatch &&
         companyMatch &&
         industryMatch &&
         cityMatch &&
-        stateMatch
+        stateMatch &&
+        zipCodeMatch
       );
     });
 

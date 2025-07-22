@@ -68,6 +68,17 @@
         [disabled]="!isFileUploaded"
       >
       </app-input-selecter>
+
+      <app-input-selecter
+        [imageName]="'zip-icon'"
+        [filterItems]="selectedZipCodes"
+        [placeholder]="'Search by Zip Code'"
+        [options]="zipCodes"
+        [selectedItems]="selectedZipCodes"
+        (selectionChanged)="onSelectedZipCode($event)"
+        [disabled]="!isFileUploaded"
+      >
+      </app-input-selecter>
     </div>
   </div>
   <div class="col-9 data-wrapper">

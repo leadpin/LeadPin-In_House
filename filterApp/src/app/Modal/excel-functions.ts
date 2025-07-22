@@ -87,3 +87,8 @@ export function getCities(data: any) {
   const cityNames = data.map((el: any) => el.city.toLowerCase());
   return [...new Set(cityNames)];
 }
+
+export function getZipCodes(data: any) {
+  const zipCodes = data.map((el: any) => el.zipCode);
+  return [...new Set(zipCodes)];
+}
