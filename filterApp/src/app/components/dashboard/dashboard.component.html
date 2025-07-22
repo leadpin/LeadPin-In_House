@@ -4,7 +4,7 @@
 
     <div class="">
       <app-input-selecter
-        [imageName]="'country'"
+        [imageName]="'country-icon'"
         [filterItems]="selectedCountries"
         [placeholder]="'Search by Country'"
         [options]="countryList"
@@ -15,12 +15,23 @@
       </app-input-selecter>
 
       <app-input-selecter
-        [imageName]="'job'"
+        [imageName]="'job-icon'"
         [filterItems]="selectedJob"
         [placeholder]="'Search by Job Title'"
         [options]="jobTitles"
         [selectedItems]="selectedJob"
         (selectionChanged)="onJobChange($event)"
+        [disabled]="!isFileUploaded"
+      >
+      </app-input-selecter>
+
+      <app-input-selecter
+        [imageName]="'job-icon'"
+        [filterItems]="selectedManagementLevel"
+        [placeholder]="'Search by Managemnt Level --'"
+        [options]="managementLevels"
+        [selectedItems]="selectedManagementLevel"
+        (selectionChanged)="onSelectedManagementLevel($event)"
         [disabled]="!isFileUploaded"
       >
       </app-input-selecter>

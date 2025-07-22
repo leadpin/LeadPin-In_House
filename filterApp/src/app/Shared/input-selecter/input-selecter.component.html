@@ -6,6 +6,7 @@
       src="../assets/icons/close-tag.png"
       alt="close-img"
       (click)="addOrRemove(item)"
+      class="close-img"
     />
   </span>
 </div>
@@ -42,6 +43,6 @@
     *ngIf="filterItems.length > 0"
     (click)="clearAllSelection()"
   >
-    <img src="../assets/icons/close.png" alt="close-img" />
+    <img class="close-img" src="../assets/icons/close.png" alt="close-img" />
   </div>
 </div>

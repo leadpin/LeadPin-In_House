@@ -15,7 +15,7 @@ import {
   mapToProspect,
   removeDuplicateEmailsData,
 } from '../../Modal/excel-functions';
-import { itemsPerPageData } from '../../Modal/excel-constants';
+import { ITEMS_PER_PAGE, MANAGEMENT_LEVELS } from '../../Modal/excel-constants';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { InputSelecterComponent } from '../../Shared/input-selecter/input-selecter.component';
 import { ExcelTableComponent } from '../excel-table/excel-table.component';
@@ -37,7 +37,7 @@ export class DashboardComponent {
   tableFields!: string[];
   pageNumber = 1;
   itemsPerPage = 10;
-  itemsPerPageList = itemsPerPageData;
+  itemsPerPageList = ITEMS_PER_PAGE;
   totalProduct: any;
   countryList: any = [];
   selectedCountries: string[] = [];
@@ -51,9 +51,11 @@ export class DashboardComponent {
   selectedCities: string[] = [];
   stateNames: any = [];
   selectedStates: string[] = [];
-
   zipCodes: any = [];
   selectedZipCodes: string[] = [];
+
+  managementLevels = MANAGEMENT_LEVELS;
+  selectedManagementLevel: string[] = [];
 
   isFileUploaded = false;
   constructor() {}
@@ -135,6 +137,11 @@ export class DashboardComponent {
     this.applyCombinedFilters();
   }
 
+  onSelectedManagementLevel(selectedVal: any[]) {
+    this.selectedManagementLevel = [...selectedVal];
+    this.applyCombinedFilters();
+  }
+
   applyCombinedFilters() {
     this.ExcelData = this.tempExcelData.filter((item) => {
       const itemCountry = item.country.toLowerCase();
@@ -183,6 +190,15 @@ export class DashboardComponent {
         this.selectedZipCodes.length === 0 ||
         this.selectedZipCodes.some((zipCode) => itemZipCode.includes(zipCode));
 
+      const levelMatch =
+        this.selectedManagementLevel.length === 0 ||
+        this.selectedManagementLevel.some((level) =>
+          itemJob
+            .split(/[\s,-]+/)
+            .map((word) => word.toLowerCase())
+            .includes(level.toLowerCase())
+        );
+
       return (
         countryMatch &&
         jobMatch &&
@@ -190,7 +206,8 @@ export class DashboardComponent {
         industryMatch &&
         cityMatch &&
         stateMatch &&
-        zipCodeMatch
+        zipCodeMatch &&
+        levelMatch
       );
     });
 
