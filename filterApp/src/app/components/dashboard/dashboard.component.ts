@@ -16,11 +16,7 @@ import {
   mapToProspect,
   removeDuplicateEmailsData,
 } from '../../Modal/excel-functions';
-import {
-  EMP_SIZES,
-  ITEMS_PER_PAGE,
-  MANAGEMENT_LEVELS,
-} from '../../Modal/excel-constants';
+import { ITEMS_PER_PAGE, MANAGEMENT_LEVELS } from '../../Modal/excel-constants';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { InputSelecterComponent } from '../../Shared/input-selecter/input-selecter.component';
 import { ExcelTableComponent } from '../excel-table/excel-table.component';
