@@ -47,6 +47,9 @@
       border: none;
       border-radius: 10px;
     }
+    .search-input::placeholder {
+      font-size: 12px;
+    }
     .dropdown-list {
       position: absolute;
       top: 100%;

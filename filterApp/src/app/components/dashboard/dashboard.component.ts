@@ -63,6 +63,7 @@ export class DashboardComponent {
   isFileUploaded = false;
   constructor() {}
 
+  //Read Data from Excel File.
   readExcel(event: any): void {
     const file = event.target.files[0];
     if (!file) return;
