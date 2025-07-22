@@ -7,6 +7,7 @@ import {
   getCities,
   getCompanies,
   getCountries,
+  getEmpSizes,
   getIndustries,
   getJobTitles,
   getStates,
@@ -15,7 +16,11 @@ import {
   mapToProspect,
   removeDuplicateEmailsData,
 } from '../../Modal/excel-functions';
-import { ITEMS_PER_PAGE, MANAGEMENT_LEVELS } from '../../Modal/excel-constants';
+import {
+  EMP_SIZES,
+  ITEMS_PER_PAGE,
+  MANAGEMENT_LEVELS,
+} from '../../Modal/excel-constants';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { InputSelecterComponent } from '../../Shared/input-selecter/input-selecter.component';
 import { ExcelTableComponent } from '../excel-table/excel-table.component';
@@ -53,9 +58,11 @@ export class DashboardComponent {
   selectedStates: string[] = [];
   zipCodes: any = [];
   selectedZipCodes: string[] = [];
-
   managementLevels = MANAGEMENT_LEVELS;
   selectedManagementLevel: string[] = [];
+
+  empSizes: any[] = [];
+  selectedEmpSize: string[] = [];
 
   isFileUploaded = false;
   constructor() {}
@@ -83,9 +90,10 @@ export class DashboardComponent {
       this.jobTitles = getJobTitles(this.ExcelData);
       this.companyNames = getCompanies(this.ExcelData);
       this.industryNames = getIndustries(this.ExcelData);
-      this.cityNames = getCities(this.ExcelData);
       this.stateNames = getStates(this.ExcelData);
+      this.cityNames = getCities(this.ExcelData);
       this.zipCodes = getZipCodes(this.ExcelData);
+      this.empSizes = getEmpSizes(this.ExcelData);
     };
 
     fileReader.readAsArrayBuffer(file);
@@ -142,6 +150,11 @@ export class DashboardComponent {
     this.applyCombinedFilters();
   }
 
+  onSelectedEmpSize(selectedVal: any[]) {
+    this.selectedEmpSize = [...selectedVal];
+    this.applyCombinedFilters();
+  }
+
   applyCombinedFilters() {
     this.ExcelData = this.tempExcelData.filter((item) => {
       const itemCountry = item.country.toLowerCase();
@@ -151,6 +164,7 @@ export class DashboardComponent {
       const itemState = item.state.toLowerCase();
       const itemCity = item.city.toLowerCase();
       const itemZipCode = item.zipCode;
+      const itemEmpSize = item.employeeSize;
 
       const countryMatch =
         this.selectedCountries.length === 0 ||
@@ -199,6 +213,10 @@ export class DashboardComponent {
             .includes(level.toLowerCase())
         );
 
+      const empSizeMatch =
+        this.selectedEmpSize.length === 0 ||
+        this.selectedEmpSize.some((empSize) => itemEmpSize.includes(empSize));
+
       return (
         countryMatch &&
         jobMatch &&
@@ -207,7 +225,8 @@ export class DashboardComponent {
         cityMatch &&
         stateMatch &&
         zipCodeMatch &&
-        levelMatch
+        levelMatch &&
+        empSizeMatch
       );
     });
 

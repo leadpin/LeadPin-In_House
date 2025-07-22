@@ -28,7 +28,7 @@
       <app-input-selecter
         [imageName]="'job-icon'"
         [filterItems]="selectedManagementLevel"
-        [placeholder]="'Search by Managemnt Level --'"
+        [placeholder]="'Search by Managemnt Level'"
         [options]="managementLevels"
         [selectedItems]="selectedManagementLevel"
         (selectionChanged)="onSelectedManagementLevel($event)"
@@ -54,6 +54,17 @@
         [options]="industryNames"
         [selectedItems]="selectedIndustries"
         (selectionChanged)="onSelectedIndustry($event)"
+        [disabled]="!isFileUploaded"
+      >
+      </app-input-selecter>
+
+      <app-input-selecter
+        [imageName]="'industry-icon'"
+        [filterItems]="selectedEmpSize"
+        [placeholder]="'Search by Employee Size'"
+        [options]="empSizes"
+        [selectedItems]="selectedEmpSize"
+        (selectionChanged)="onSelectedEmpSize($event)"
         [disabled]="!isFileUploaded"
       >
       </app-input-selecter>

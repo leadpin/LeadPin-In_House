@@ -92,3 +92,8 @@ export function getZipCodes(data: any) {
   const zipCodes = data.map((el: any) => el.zipCode);
   return [...new Set(zipCodes)];
 }
+
+export function getEmpSizes(data: any) {
+  const empSize = data.map((el: any) => el.employeeSize);
+  return [...new Set(empSize)];
+}
