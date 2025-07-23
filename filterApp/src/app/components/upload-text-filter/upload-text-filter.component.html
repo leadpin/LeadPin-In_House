@@ -1,0 +1,15 @@
+<div class="text-wrapper" [class.disabled]="disabled">
+  <img
+    [src]="'../assets/icons/' + imageName + '.svg'"
+    class="filter-icon"
+    alt="country-icon"
+    srcset=""
+  />
+  <textarea
+    class="text-field"
+    rows="5"
+    cols="40"
+    (input)="onUploadData($event)"
+    [placeholder]="placeholder"
+  ></textarea>
+</div>

@@ -26,6 +26,7 @@ import {
 import { NgxPaginationModule } from 'ngx-pagination';
 import { InputSelecterComponent } from '../../Shared/input-selecter/input-selecter.component';
 import { ExcelTableComponent } from '../excel-table/excel-table.component';
+import { UploadTextFilterComponent } from '../upload-text-filter/upload-text-filter.component';
 @Component({
   selector: 'app-dashboard',
   imports: [
@@ -33,6 +34,7 @@ import { ExcelTableComponent } from '../excel-table/excel-table.component';
     NgxPaginationModule,
     InputSelecterComponent,
     ExcelTableComponent,
+    UploadTextFilterComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
@@ -165,29 +167,23 @@ export class DashboardComponent {
     this.applyCombinedFilters();
   }
 
-  onSelectedDomain(selectedVal: any[]) {
-    this.selectedDomain = [...selectedVal];
-    this.applyCombinedFilters();
-  }
+  // onSelectedDomain(selectedVal: any[]) {
+  //   this.selectedDomain = [...selectedVal];
+  //   this.applyCombinedFilters();
+  // }
 
   onSelectedDepartments(selectedVal: any[]) {
     this.selectetdDepartments = [...selectedVal];
     this.applyCombinedFilters();
   }
 
-  onCompanyChange(event: Event): void {
-    const input = (event.target as HTMLTextAreaElement).value;
-    const formatted = dataClean(input);
-
-    this.companyUploadList = formatted.map((data: any) => data.toLowerCase());
+  onCompanyUpload(val: any): void {
+    this.companyUploadList = val.map((data: any) => data.toLowerCase());
     this.applyCombinedFilters();
   }
 
-  onDomainChange(event: Event): void {
-    const input = (event.target as HTMLTextAreaElement).value;
-    const formatted = dataClean(input);
-
-    this.domainUploadList = formatted.map((data: any) => data.toLowerCase());
+  onDomainUpload(val: any): void {
+    this.domainUploadList = val.map((data: any) => data.toLowerCase());
     this.applyCombinedFilters();
   }
 
@@ -263,7 +259,7 @@ export class DashboardComponent {
       //     itemEmail.includes(domain.toLowerCase())
       //   );
 
-      const domainMatch =
+      const uploadDomainMatch =
         this.domainUploadList.length === 0 ||
         this.domainUploadList.some((domain) =>
           itemEmail.includes(domain.toLowerCase())
@@ -289,8 +285,8 @@ export class DashboardComponent {
         zipCodeMatch &&
         levelMatch &&
         empSizeMatch &&
-        domainMatch &&
         departmentMatch &&
+        uploadDomainMatch &&
         uploadCompanyMatch
       );
     });

@@ -47,36 +47,21 @@
       >
       </app-input-selecter> -->
 
-      <div class="text-wrapper" [class.disabled]="!isFileUploaded">
-        <img
-          src="../assets/icons/company-icon.svg"
-          class="filter-icon"
-          alt="country-icon"
-          srcset=""
-        />
-        <textarea
-          class="text-field"
-          rows="5"
-          cols="40"
-          (input)="onCompanyChange($event)"
-          placeholder="filter by company name."
-        ></textarea>
-      </div>
-      <div class="text-wrapper" [class.disabled]="!isFileUploaded">
-        <img
-          src="../assets/icons/company-icon.svg"
-          class="filter-icon"
-          alt="country-icon"
-          srcset=""
-        />
-        <textarea
-          class="text-field"
-          rows="5"
-          cols="40"
-          (input)="onDomainChange($event)"
-          placeholder="filter by Doamin name--."
-        ></textarea>
-      </div>
+      <app-upload-text-filter
+        [imageName]="'company-icon'"
+        [placeholder]="'filter by company name.'"
+        [options]="companyUploadList"
+        (selectionChanged)="onCompanyUpload($event)"
+        [disabled]="!isFileUploaded"
+      ></app-upload-text-filter>
+
+      <app-upload-text-filter
+        [imageName]="'company-icon'"
+        [placeholder]="'filter by damian.'"
+        [options]="domainUploadList"
+        (selectionChanged)="onDomainUpload($event)"
+        [disabled]="!isFileUploaded"
+      ></app-upload-text-filter>
 
       <app-input-selecter
         [imageName]="'industry-icon'"
