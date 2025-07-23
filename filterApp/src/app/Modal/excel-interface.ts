@@ -1,10 +1,9 @@
 export interface IExcelData {
-  // reduce(arg0: (seen: any, obj: any) => any, arg1: {}): unknown;
-  // filter(arg0: (obj: any) => boolean): unknown;
   fullName: string;
   jobTitle: string;
   companyName: string;
   email: string;
+  mobileNumber: string;
   industry: string;
   employeeSize: string;
   phoneNumber: string;
