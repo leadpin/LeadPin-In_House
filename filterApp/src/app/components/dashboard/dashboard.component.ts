@@ -17,7 +17,11 @@ import {
   mapToProspect,
   removeDuplicateEmailsData,
 } from '../../Modal/excel-functions';
-import { ITEMS_PER_PAGE, MANAGEMENT_LEVELS } from '../../Modal/excel-constants';
+import {
+  DEPARTMENTS,
+  ITEMS_PER_PAGE,
+  MANAGEMENT_LEVELS,
+} from '../../Modal/excel-constants';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { InputSelecterComponent } from '../../Shared/input-selecter/input-selecter.component';
 import { ExcelTableComponent } from '../excel-table/excel-table.component';
@@ -59,9 +63,11 @@ export class DashboardComponent {
   selectedManagementLevel: string[] = [];
   empSizes: any[] = [];
   selectedEmpSize: string[] = [];
-
   companyDomainList: any[] = [];
   selectedDomain: string[] = [];
+
+  departments = DEPARTMENTS;
+  selectetdDepartments: string[] = [];
 
   isFileUploaded = false;
   constructor() {}
@@ -161,6 +167,11 @@ export class DashboardComponent {
     this.applyCombinedFilters();
   }
 
+  onSelectedDepartments(selectedVal: any[]) {
+    this.selectetdDepartments = [...selectedVal];
+    this.applyCombinedFilters();
+  }
+
   applyCombinedFilters() {
     this.ExcelData = this.tempExcelData.filter((item) => {
       const itemCountry = item.country.toLowerCase();
@@ -232,6 +243,10 @@ export class DashboardComponent {
           itemEmail.includes(domain.toLowerCase())
         );
 
+      const departmentMatch =
+        this.selectetdDepartments.length === 0 ||
+        this.selectetdDepartments.some((dept) => itemJobTilte.includes(dept));
+
       return (
         countryMatch &&
         jobMatch &&
@@ -242,7 +257,8 @@ export class DashboardComponent {
         zipCodeMatch &&
         levelMatch &&
         empSizeMatch &&
-        domainMatch
+        domainMatch &&
+        departmentMatch
       );
     });
 

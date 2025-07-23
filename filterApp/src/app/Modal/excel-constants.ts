@@ -13,6 +13,7 @@ export const MANAGEMENT_LEVELS: string[] = [
   'chief marketing officer',
   'chief product officer',
   'chief people officer',
+  'chief executive officer',
   'partner',
   'vice president',
   'senior vice president',
@@ -43,17 +44,16 @@ export const MANAGEMENT_LEVELS: string[] = [
   'trainee',
 ];
 
-export const JOB_FUNCTIONS: string[] = [
+export const DEPARTMENTS: string[] = [
   'product',
   'engineering & technical',
   'design',
-  'education',
   'finance',
   'human resources',
+  'it',
   'information technology',
   'legal',
   'marketing',
-  'medical & health',
   'operations',
   'sales',
   'consulting',

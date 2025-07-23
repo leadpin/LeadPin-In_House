@@ -6,7 +6,7 @@
       <app-input-selecter
         [imageName]="'country-icon'"
         [filterItems]="selectedCountries"
-        [placeholder]="'Search by Country'"
+        [placeholder]="'Filter by Country.'"
         [options]="countryList"
         [selectedItems]="selectedCountries"
         (selectionChanged)="onSelectedCountry($event)"
@@ -17,7 +17,7 @@
       <app-input-selecter
         [imageName]="'job-icon'"
         [filterItems]="selectedJobTitle"
-        [placeholder]="'Search by Job Title'"
+        [placeholder]="'Filter by Job Title.'"
         [options]="jobTitles"
         [selectedItems]="selectedJobTitle"
         (selectionChanged)="onSelectedJobTitle($event)"
@@ -28,7 +28,7 @@
       <app-input-selecter
         [imageName]="'job-icon'"
         [filterItems]="selectedManagementLevel"
-        [placeholder]="'Search by Managemnt Level'"
+        [placeholder]="'Filter by Managemnt Level.'"
         [options]="managementLevels"
         [selectedItems]="selectedManagementLevel"
         (selectionChanged)="onSelectedManagementLevel($event)"
@@ -39,7 +39,7 @@
       <app-input-selecter
         [imageName]="'company-icon'"
         [filterItems]="selectedCompanies"
-        [placeholder]="'Search by Company'"
+        [placeholder]="'Filter by Company.'"
         [options]="companyNames"
         [selectedItems]="selectedCompanies"
         (selectionChanged)="onSelectedCompany($event)"
@@ -50,7 +50,7 @@
       <app-input-selecter
         [imageName]="'industry-icon'"
         [filterItems]="selectedIndustries"
-        [placeholder]="'Search by Industry'"
+        [placeholder]="'Filter by Industry.'"
         [options]="industryNames"
         [selectedItems]="selectedIndustries"
         (selectionChanged)="onSelectedIndustry($event)"
@@ -60,8 +60,19 @@
 
       <app-input-selecter
         [imageName]="'industry-icon'"
+        [filterItems]="selectetdDepartments"
+        [placeholder]="'Filter by Departments.'"
+        [options]="departments"
+        [selectedItems]="selectetdDepartments"
+        (selectionChanged)="onSelectedDepartments($event)"
+        [disabled]="!isFileUploaded"
+      >
+      </app-input-selecter>
+
+      <app-input-selecter
+        [imageName]="'industry-icon'"
         [filterItems]="selectedEmpSize"
-        [placeholder]="'Search by Employee Size'"
+        [placeholder]="'Filter by Employee Size.'"
         [options]="empSizes"
         [selectedItems]="selectedEmpSize"
         (selectionChanged)="onSelectedEmpSize($event)"
@@ -72,7 +83,7 @@
       <app-input-selecter
         [imageName]="'industry-icon'"
         [filterItems]="selectedDomain"
-        [placeholder]="'Search by Domain'"
+        [placeholder]="'Filter by Domain.'"
         [options]="companyDomainList"
         [selectedItems]="selectedDomain"
         (selectionChanged)="onSelectedDomain($event)"
@@ -83,7 +94,7 @@
       <app-input-selecter
         [imageName]="'state-icon'"
         [filterItems]="selectedStates"
-        [placeholder]="'Search by State'"
+        [placeholder]="'Filter by State.'"
         [options]="stateNames"
         [selectedItems]="selectedStates"
         (selectionChanged)="onSelectedState($event)"
@@ -94,7 +105,7 @@
       <app-input-selecter
         [imageName]="'city-icon'"
         [filterItems]="selectedCities"
-        [placeholder]="'Search by City'"
+        [placeholder]="'Filter by City.'"
         [options]="cityNames"
         [selectedItems]="selectedCities"
         (selectionChanged)="onSelectedCity($event)"
@@ -105,7 +116,7 @@
       <app-input-selecter
         [imageName]="'zip-icon'"
         [filterItems]="selectedZipCodes"
-        [placeholder]="'Search by Zip Code'"
+        [placeholder]="'Filter by Zip Code.'"
         [options]="zipCodes"
         [selectedItems]="selectedZipCodes"
         (selectionChanged)="onSelectedZipCode($event)"

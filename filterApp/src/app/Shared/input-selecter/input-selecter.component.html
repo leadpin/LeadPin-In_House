@@ -1,6 +1,6 @@
 <div class="tags-container" *ngIf="filterItems.length > 0">
   <span class="tag" *ngFor="let item of filterItems">
-    {{ item }}
+    {{ item | uppercase }}
 
     <img
       src="../assets/icons/close-tag.png"
@@ -33,7 +33,7 @@
         class="dropdown-item"
         (click)="addOrRemove(option)"
       >
-        {{ option | titlecase }}
+        {{ option | uppercase }}
       </div>
     </div>
   </div>
