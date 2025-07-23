@@ -16,11 +16,11 @@
 
       <app-input-selecter
         [imageName]="'job-icon'"
-        [filterItems]="selectedJob"
+        [filterItems]="selectedJobTitle"
         [placeholder]="'Search by Job Title'"
         [options]="jobTitles"
-        [selectedItems]="selectedJob"
-        (selectionChanged)="onJobChange($event)"
+        [selectedItems]="selectedJobTitle"
+        (selectionChanged)="onSelectedJobTitle($event)"
         [disabled]="!isFileUploaded"
       >
       </app-input-selecter>

@@ -44,7 +44,7 @@ export class DashboardComponent {
   countryList: any = [];
   selectedCountries: string[] = [];
   jobTitles: any = [];
-  selectedJob: string[] = [];
+  selectedJobTitle: string[] = [];
   companyNames: any = [];
   selectedCompanies: string[] = [];
   industryNames: any = [];
@@ -117,8 +117,8 @@ export class DashboardComponent {
     this.applyCombinedFilters();
   }
 
-  onJobChange(selectedVal: string[]) {
-    this.selectedJob = [...selectedVal];
+  onSelectedJobTitle(selectedVal: string[]) {
+    this.selectedJobTitle = [...selectedVal];
     this.applyCombinedFilters();
   }
   onSelectedCompany(selectedVal: string[]) {
@@ -164,7 +164,7 @@ export class DashboardComponent {
   applyCombinedFilters() {
     this.ExcelData = this.tempExcelData.filter((item) => {
       const itemCountry = item.country.toLowerCase();
-      const itemJob = item.jobTitle.toLowerCase();
+      const itemJobTilte = item.jobTitle.toLowerCase();
       const itemCompany = item.companyName.toLowerCase();
       const itemIndustry = item.industry.toLowerCase();
       const itemState = item.state.toLowerCase();
@@ -180,8 +180,10 @@ export class DashboardComponent {
         );
 
       const jobMatch =
-        this.selectedJob.length === 0 ||
-        this.selectedJob.some((job) => itemJob.includes(job.toLowerCase()));
+        this.selectedJobTitle.length === 0 ||
+        this.selectedJobTitle.some((job) =>
+          itemJobTilte.includes(job.toLowerCase())
+        );
 
       const companyMatch =
         this.selectedCompanies.length === 0 ||
@@ -214,7 +216,7 @@ export class DashboardComponent {
       const levelMatch =
         this.selectedManagementLevel.length === 0 ||
         this.selectedManagementLevel.some((level) =>
-          itemJob
+          itemJobTilte
             .split(/[\s,-]+/)
             .map((word) => word.toLowerCase())
             .includes(level.toLowerCase())

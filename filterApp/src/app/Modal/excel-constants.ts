@@ -42,3 +42,20 @@ export const MANAGEMENT_LEVELS: string[] = [
   'intern',
   'trainee',
 ];
+
+export const JOB_FUNCTIONS: string[] = [
+  'product',
+  'engineering & technical',
+  'design',
+  'education',
+  'finance',
+  'human resources',
+  'information technology',
+  'legal',
+  'marketing',
+  'medical & health',
+  'operations',
+  'sales',
+  'consulting',
+  'business development',
+];
