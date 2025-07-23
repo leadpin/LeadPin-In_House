@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import {
   convertFieldNames,
   getCities,
+  getComapanyDomains,
   getCompanies,
   getCountries,
   getEmpSizes,
@@ -56,9 +57,11 @@ export class DashboardComponent {
   selectedZipCodes: string[] = [];
   managementLevels = MANAGEMENT_LEVELS;
   selectedManagementLevel: string[] = [];
-
   empSizes: any[] = [];
   selectedEmpSize: string[] = [];
+
+  companyDomainList: any[] = [];
+  selectedDomain: string[] = [];
 
   isFileUploaded = false;
   constructor() {}
@@ -91,6 +94,7 @@ export class DashboardComponent {
       this.cityNames = getCities(this.ExcelData);
       this.zipCodes = getZipCodes(this.ExcelData);
       this.empSizes = getEmpSizes(this.ExcelData);
+      this.companyDomainList = getComapanyDomains(this.ExcelData);
     };
 
     fileReader.readAsArrayBuffer(file);
@@ -152,6 +156,11 @@ export class DashboardComponent {
     this.applyCombinedFilters();
   }
 
+  onSelectedDomain(selectedVal: any[]) {
+    this.selectedDomain = [...selectedVal];
+    this.applyCombinedFilters();
+  }
+
   applyCombinedFilters() {
     this.ExcelData = this.tempExcelData.filter((item) => {
       const itemCountry = item.country.toLowerCase();
@@ -162,6 +171,7 @@ export class DashboardComponent {
       const itemCity = item.city.toLowerCase();
       const itemZipCode = item.zipCode;
       const itemEmpSize = item.employeeSize;
+      const itemEmail = item.email.split('@')[1].toLowerCase();
 
       const countryMatch =
         this.selectedCountries.length === 0 ||
@@ -214,6 +224,12 @@ export class DashboardComponent {
         this.selectedEmpSize.length === 0 ||
         this.selectedEmpSize.some((empSize) => itemEmpSize.includes(empSize));
 
+      const domainMatch =
+        this.selectedDomain.length === 0 ||
+        this.selectedDomain.some((domain) =>
+          itemEmail.includes(domain.toLowerCase())
+        );
+
       return (
         countryMatch &&
         jobMatch &&
@@ -223,7 +239,8 @@ export class DashboardComponent {
         stateMatch &&
         zipCodeMatch &&
         levelMatch &&
-        empSizeMatch
+        empSizeMatch &&
+        domainMatch
       );
     });
 

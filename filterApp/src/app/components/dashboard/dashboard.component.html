@@ -70,6 +70,17 @@
       </app-input-selecter>
 
       <app-input-selecter
+        [imageName]="'industry-icon'"
+        [filterItems]="selectedDomain"
+        [placeholder]="'Search by Domain'"
+        [options]="companyDomainList"
+        [selectedItems]="selectedDomain"
+        (selectionChanged)="onSelectedDomain($event)"
+        [disabled]="!isFileUploaded"
+      >
+      </app-input-selecter>
+
+      <app-input-selecter
         [imageName]="'state-icon'"
         [filterItems]="selectedStates"
         [placeholder]="'Search by State'"

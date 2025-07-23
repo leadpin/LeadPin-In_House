@@ -97,3 +97,8 @@ export function getEmpSizes(data: any) {
   const empSize = data.map((el: any) => el.employeeSize);
   return [...new Set(empSize)];
 }
+
+export function getComapanyDomains(data: any) {
+  const domain = data.map((el: any) => el.email.split('@')[1]);
+  return [...new Set(domain)];
+}
