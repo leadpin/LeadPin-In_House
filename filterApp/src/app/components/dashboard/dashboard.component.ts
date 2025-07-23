@@ -4,6 +4,7 @@ import { IExcelData } from '../../Modal/excel-interface';
 import { CommonModule } from '@angular/common';
 import {
   convertFieldNames,
+  dataClean,
   getCities,
   getComapanyDomains,
   getCompanies,
@@ -65,9 +66,11 @@ export class DashboardComponent {
   selectedEmpSize: string[] = [];
   companyDomainList: any[] = [];
   selectedDomain: string[] = [];
-
   departments = DEPARTMENTS;
   selectetdDepartments: string[] = [];
+
+  companyUploadList: string[] = [];
+  domainUploadList: string[] = [];
 
   isFileUploaded = false;
   constructor() {}
@@ -172,6 +175,22 @@ export class DashboardComponent {
     this.applyCombinedFilters();
   }
 
+  onCompanyChange(event: Event): void {
+    const input = (event.target as HTMLTextAreaElement).value;
+    const formatted = dataClean(input);
+
+    this.companyUploadList = formatted.map((data: any) => data.toLowerCase());
+    this.applyCombinedFilters();
+  }
+
+  onDomainChange(event: Event): void {
+    const input = (event.target as HTMLTextAreaElement).value;
+    const formatted = dataClean(input);
+
+    this.domainUploadList = formatted.map((data: any) => data.toLowerCase());
+    this.applyCombinedFilters();
+  }
+
   applyCombinedFilters() {
     this.ExcelData = this.tempExcelData.filter((item) => {
       const itemCountry = item.country.toLowerCase();
@@ -183,6 +202,7 @@ export class DashboardComponent {
       const itemZipCode = item.zipCode;
       const itemEmpSize = item.employeeSize;
       const itemEmail = item.email.split('@')[1].toLowerCase();
+      const CleanCompanyNamesData = dataClean(itemCompany);
 
       const countryMatch =
         this.selectedCountries.length === 0 ||
@@ -237,15 +257,27 @@ export class DashboardComponent {
         this.selectedEmpSize.length === 0 ||
         this.selectedEmpSize.some((empSize) => itemEmpSize.includes(empSize));
 
+      // const domainMatch =
+      //   this.selectedDomain.length === 0 ||
+      //   this.selectedDomain.some((domain) =>
+      //     itemEmail.includes(domain.toLowerCase())
+      //   );
+
       const domainMatch =
-        this.selectedDomain.length === 0 ||
-        this.selectedDomain.some((domain) =>
+        this.domainUploadList.length === 0 ||
+        this.domainUploadList.some((domain) =>
           itemEmail.includes(domain.toLowerCase())
         );
 
       const departmentMatch =
         this.selectetdDepartments.length === 0 ||
         this.selectetdDepartments.some((dept) => itemJobTilte.includes(dept));
+
+      const uploadCompanyMatch =
+        this.companyUploadList.length === 0 ||
+        this.companyUploadList.some((company) =>
+          CleanCompanyNamesData.includes(company)
+        );
 
       return (
         countryMatch &&
@@ -258,7 +290,8 @@ export class DashboardComponent {
         levelMatch &&
         empSizeMatch &&
         domainMatch &&
-        departmentMatch
+        departmentMatch &&
+        uploadCompanyMatch
       );
     });
 

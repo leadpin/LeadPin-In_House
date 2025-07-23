@@ -99,6 +99,17 @@ export function getEmpSizes(data: any) {
 }
 
 export function getComapanyDomains(data: any) {
-  const domain = data.map((el: any) => el.email.split('@')[1]);
+  const domain = data.map((el: any) => el.email.split('@')[1].toString());
   return [...new Set(domain)];
+}
+
+export function dataClean(val: any) {
+  const formatted = val
+    .split('\n')
+    .map((line: any) => {
+      let clean = line.replace(/,/g, '').trim();
+      return clean ? `${clean}` : '';
+    })
+    .filter((line: any) => line !== '');
+  return formatted;
 }
