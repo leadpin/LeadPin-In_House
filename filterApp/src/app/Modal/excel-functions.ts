@@ -96,12 +96,20 @@ export function getZipCodes(data: any) {
 }
 
 export function getEmpSizes(data: any) {
-  const empSize = data.map((el: any) => el.employeeSize);
+  const empSize = data.map((el: any) => el.employeeSize.toString());
   return [...new Set(empSize)];
 }
 
 export function getComapanyDomains(data: any) {
-  const domain = data.map((el: any) => el.email.split('@')[1].toString());
+  const domain = data
+    .map((el: any) => {
+      if (el.email && el.email.includes('@')) {
+        const parts = el.email.split('@');
+        return parts[1]?.trim().toLowerCase(); // safely extract domain
+      }
+      return null;
+    })
+    .filter((d: string | null | undefined) => d); // remove null/undefined/empty
   return [...new Set(domain)];
 }
 

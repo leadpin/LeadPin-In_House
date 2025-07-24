@@ -189,15 +189,19 @@ export class DashboardComponent {
 
   applyCombinedFilters() {
     this.ExcelData = this.tempExcelData.filter((item) => {
-      const itemCountry = item.country.toLowerCase();
-      const itemJobTilte = item.jobTitle.toLowerCase();
-      const itemCompany = item.companyName.toLowerCase();
-      const itemIndustry = item.industry.toLowerCase();
-      const itemState = item.state.toLowerCase();
-      const itemCity = item.city.toLowerCase();
-      const itemZipCode = item.zipCode;
-      const itemEmpSize = item.employeeSize;
-      const itemEmail = item.email.split('@')[1].toLowerCase();
+      const itemCountry = (item.country ?? '').toLowerCase();
+      const itemJobTilte = (item.jobTitle ?? '').toLowerCase();
+      const itemCompany = (item.companyName ?? '').toLowerCase();
+      const itemIndustry = (item.industry ?? '').toLowerCase();
+      const itemState = (item.state ?? '').toLowerCase();
+      const itemCity = (item.city ?? '').toLowerCase();
+      const itemZipCode = item.zipCode ?? '';
+      const itemEmpSize = (item.employeeSize ?? '').toString();
+      const itemEmail = item.email ?? '';
+      const itemDomain = itemEmail.includes('@')
+        ? itemEmail.split('@')[1].toLowerCase()
+        : '';
+
       const CleanCompanyNamesData = dataClean(itemCompany);
 
       const countryMatch =
@@ -262,7 +266,7 @@ export class DashboardComponent {
       const uploadDomainMatch =
         this.domainUploadList.length === 0 ||
         this.domainUploadList.some((domain) =>
-          itemEmail.includes(domain.toLowerCase())
+          itemDomain.includes(domain.toLowerCase())
         );
 
       const departmentMatch =

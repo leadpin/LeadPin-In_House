@@ -10,7 +10,7 @@
     </thead>
     <tbody>
       @for (item of ExcelData | paginate: { itemsPerPage: itemsPerPage,
-      currentPage: pageNumber }; track item; let index = $index; ) {
+      currentPage: pageNumber }; track index; let index = $index; ) {
       <tr>
         <td class="xxsm-width">{{ index + 1 }}</td>
         <td class="sm-width">{{ item.fullName }}</td>
