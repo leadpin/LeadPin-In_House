@@ -6,7 +6,6 @@ import {
   convertFieldNames,
   dataClean,
   getCities,
-  getComapanyDomains,
   getCompanies,
   getCountries,
   getEmpSizes,
@@ -105,7 +104,7 @@ export class DashboardComponent {
       this.cityNames = getCities(this.ExcelData);
       this.zipCodes = getZipCodes(this.ExcelData);
       this.empSizes = getEmpSizes(this.ExcelData);
-      this.companyDomainList = getComapanyDomains(this.ExcelData);
+      // this.companyDomainList = getComapanyDomains(this.ExcelData);
     };
 
     fileReader.readAsArrayBuffer(file);
@@ -166,11 +165,6 @@ export class DashboardComponent {
     this.selectedEmpSize = [...selectedVal];
     this.applyCombinedFilters();
   }
-
-  // onSelectedDomain(selectedVal: any[]) {
-  //   this.selectedDomain = [...selectedVal];
-  //   this.applyCombinedFilters();
-  // }
 
   onSelectedDepartments(selectedVal: any[]) {
     this.selectetdDepartments = [...selectedVal];
@@ -256,12 +250,6 @@ export class DashboardComponent {
       const empSizeMatch =
         this.selectedEmpSize.length === 0 ||
         this.selectedEmpSize.some((empSize) => itemEmpSize.includes(empSize));
-
-      // const domainMatch =
-      //   this.selectedDomain.length === 0 ||
-      //   this.selectedDomain.some((domain) =>
-      //     itemEmail.includes(domain.toLowerCase())
-      //   );
 
       const uploadDomainMatch =
         this.domainUploadList.length === 0 ||

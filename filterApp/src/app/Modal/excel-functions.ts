@@ -100,18 +100,18 @@ export function getEmpSizes(data: any) {
   return [...new Set(empSize)];
 }
 
-export function getComapanyDomains(data: any) {
-  const domain = data
-    .map((el: any) => {
-      if (el.email && el.email.includes('@')) {
-        const parts = el.email.split('@');
-        return parts[1]?.trim().toLowerCase(); // safely extract domain
-      }
-      return null;
-    })
-    .filter((d: string | null | undefined) => d); // remove null/undefined/empty
-  return [...new Set(domain)];
-}
+// export function getComapanyDomains(data: any) {
+//   const domain = data
+//     .map((el: any) => {
+//       if (el.email && el.email.includes('@')) {
+//         const parts = el.email.split('@');
+//         return parts[1]?.trim().toLowerCase(); // safely extract domain
+//       }
+//       return null;
+//     })
+//     .filter((d: string | null | undefined) => d); // remove null/undefined/empty
+//   return [...new Set(domain)];
+// }
 
 export function dataClean(val: any) {
   const formatted = val
