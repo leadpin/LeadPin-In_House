@@ -23,7 +23,7 @@ import {
   MANAGEMENT_LEVELS,
 } from '../../Modal/excel-constants';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { InputSelecterComponent } from '../../Shared/input-selecter/input-selecter.component';
+import { InputSelecterComponent } from '../input-selecter/input-selecter.component';
 import { ExcelTableComponent } from '../excel-table/excel-table.component';
 import { UploadTextFilterComponent } from '../upload-text-filter/upload-text-filter.component';
 @Component({
