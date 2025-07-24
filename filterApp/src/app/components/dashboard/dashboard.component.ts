@@ -16,7 +16,7 @@ import {
   getZipCodes,
   mapFieldNames,
   mapToProspect,
-  removeDuplicateEmailsData,
+  removeDuplicateEmptyEmailsData,
 } from '../../Modal/excel-functions';
 import {
   DEPARTMENTS,
@@ -91,8 +91,8 @@ export class DashboardComponent {
       const sheet = workbook.Sheets[sheetName];
       const rawData = XLSX.utils.sheet_to_json(sheet);
       this.ExcelData = rawData.map(mapToProspect);
+      this.ExcelData = removeDuplicateEmptyEmailsData(this.ExcelData);
 
-      this.ExcelData = removeDuplicateEmailsData(this.ExcelData);
       this.totalProduct = this.ExcelData.length;
       this.tempExcelData = this.ExcelData;
       this.isFileUploaded = true;

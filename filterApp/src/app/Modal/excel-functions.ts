@@ -2,52 +2,52 @@ import { IExcelData } from './excel-interface';
 
 export function mapToProspect(raw: any): any {
   return {
-    fullName: raw['full name'] || '',
-    jobTitle: raw['job title'] || '',
-    companyName: raw['company name'] || '',
-    email: raw['email'] || '',
-    mobileNumber: raw['mobile number'] || '',
-    industry: raw['industry'] || '',
-    employeeSize: raw['employee size'] || '',
-    phoneNumber: raw['phone number'] || '',
-    address: raw['address'] || '',
-    city: raw['city'] || '',
-    state: raw['state'] || '',
-    zipCode: raw['zip code']?.toString() || '',
-    country: raw['country'] || '',
-    website: raw['website'] || '',
-    contactLink: raw['contact link'] || '',
-    companyLink: raw['company link'] || '',
-    prospectLocation: raw['prospect location'] || '',
+    fullName: raw['Full Name'] || '',
+    jobTitle: raw['Job Title'] || '',
+    companyName: raw['Company Name'] || '',
+    email: raw['Email'] || '',
+    mobileNumber: raw['Mobile Number'] || '',
+    industry: raw['Industry'] || '',
+    employeeSize: raw['Employee Size'] || '',
+    phoneNumber: raw['Phone Number'] || '',
+    address: raw['Address'] || '',
+    city: raw['City'] || '',
+    state: raw['State'] || '',
+    zipCode: raw['Zip Code']?.toString() || '',
+    country: raw['Country'] || '',
+    website: raw['Website'] || '',
+    contactLink: raw['Contact Link'] || '',
+    companyLink: raw['Company Link'] || '',
+    prospectLocation: raw['Prospect Location'] || '',
   };
 }
 
 export function mapFieldNames(data: IExcelData[]) {
   return data.map((item: IExcelData) => ({
-    'full name': item.fullName,
-    'job title': item.jobTitle,
-    'company name': item.companyName,
-    email: item.email,
-    mobileNumber: item.mobileNumber,
-    industry: item.industry,
-    'employee size': item.employeeSize,
-    'phone number': item.phoneNumber,
-    address: item.address,
-    city: item.city,
-    state: item.state,
-    'zip code': item.zipCode,
-    country: item.country,
-    website: item.website,
-    'contact link': item.contactLink,
-    'company link': item.companyLink,
-    'prospect location': item.prospectLocation,
+    'Full Name': item.fullName,
+    'Job Title': item.jobTitle,
+    'Company Name': item.companyName,
+    Email: item.email,
+    'Mobile Number': item.mobileNumber,
+    Industry: item.industry,
+    'Employee Size': item.employeeSize,
+    'Phone Number': item.phoneNumber,
+    Address: item.address,
+    City: item.city,
+    State: item.state,
+    'Zip Code': item.zipCode,
+    Country: item.country,
+    Website: item.website,
+    'Contact Link': item.contactLink,
+    'Company Link': item.companyLink,
+    'Prospect Location': item.prospectLocation,
   }));
 }
 
-export function removeDuplicateEmailsData(excelData: IExcelData[]) {
+export function removeDuplicateEmptyEmailsData(excelData: IExcelData[]) {
   const seenEmails = new Set();
   const uniqueObjects = excelData.filter((obj: any) => {
-    if (!seenEmails.has(obj.email)) {
+    if (!seenEmails.has(obj.email) && obj.email !== '') {
       seenEmails.add(obj.email);
       return true; // Keep this object
     }
