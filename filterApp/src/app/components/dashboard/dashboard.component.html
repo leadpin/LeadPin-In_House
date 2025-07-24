@@ -48,6 +48,7 @@
       </app-input-selecter> -->
 
       <app-upload-text-filter
+        #companyNameFilter
         [imageName]="'company-icon'"
         [placeholder]="'filter by company name.'"
         [options]="companyUploadList"
@@ -56,6 +57,7 @@
       ></app-upload-text-filter>
 
       <app-upload-text-filter
+        #domainFilter
         [imageName]="'company-icon'"
         [placeholder]="'filter by damian.'"
         [options]="domainUploadList"

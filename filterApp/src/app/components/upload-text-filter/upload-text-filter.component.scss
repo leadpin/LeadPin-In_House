@@ -16,7 +16,18 @@
   .text-field {
     font-size: 12px;
   }
+  .close-icon {
+    cursor: pointer;
+    img {
+      width: 15px;
+      height: 15px;
+    }
+  }
 }
 .text-field:focus-visible {
   outline: none;
+}
+
+.close-img:hover {
+  transform: scale(1.5);
 }
