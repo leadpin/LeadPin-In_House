@@ -1,0 +1,18 @@
+<div class="text-wrapper" [class.disabled]="disabled">
+  <img
+    [src]="'../assets/icons/' + imageName + '.svg'"
+    class="filter-icon"
+    alt="country-icon"
+  />
+  <textarea
+    #textAreaName
+    class="text-field"
+    rows="5"
+    cols="40"
+    (input)="onUploadData($event)"
+    [placeholder]="placeholder"
+  ></textarea>
+  <div class="close-icon" *ngIf="options.length > 0" (click)="clearData()">
+    <img class="close-img" src="../assets/icons/close.png" alt="close-img" />
+  </div>
+</div>

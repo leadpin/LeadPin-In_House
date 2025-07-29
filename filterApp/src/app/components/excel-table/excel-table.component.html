@@ -1,0 +1,50 @@
+<div class="data-table">
+  <table class="table table-bordered" id="table-data">
+    <thead>
+      <tr>
+        <th>Sr No.</th>
+        @for (item of tableFields; track item) {
+        <th>{{ item | titlecase }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of ExcelData | paginate: { itemsPerPage: itemsPerPage,
+      currentPage: pageNumber }; track index; let index = $index; ) {
+      <tr>
+        <td class="xxsm-width">{{ index + 1 }}</td>
+        <td class="sm-width">{{ item.fullName }}</td>
+        <td class="m-width">{{ item.jobTitle }}</td>
+        <td class="m-width">{{ item.companyName }}</td>
+        <td class="m-width">{{ item.email }}</td>
+        <td class="m-width">{{ item.mobileNumber }}</td>
+        <td class="m-width">{{ item.industry }}</td>
+        <td class="sm-width">{{ item.employeeSize }}</td>
+        <td class="sm-width">{{ item.phoneNumber }}</td>
+        <td>{{ item.address }}</td>
+        <td class="xsm-width">{{ item.city }}</td>
+        <td class="xsm-width">{{ item.state }}</td>
+        <td class="xsm-width">{{ item.zipCode }}</td>
+        <td class="xsm-width">{{ item.country }}</td>
+        <td class="sm-width">{{ item.website }}</td>
+        <td class="m-width">{{ item.contactLink }}</td>
+        <td class="m-width">{{ item.companyLink }}</td>
+        <td class="sm-width">{{ item.prospectLocation }}</td>
+      </tr>
+      } @empty {
+      <tr>
+        <td colspan="17" class="no-data">
+          <h1>No Data Found</h1>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  <div class="row mt-4">
+    <div>
+      <pagination-controls
+        (pageChange)="pageNumber = $event"
+      ></pagination-controls>
+    </div>
+  </div>
+</div>

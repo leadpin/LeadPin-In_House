@@ -1,0 +1,48 @@
+<div class="tags-container" *ngIf="filterItems.length > 0">
+  <span class="tag" *ngFor="let item of filterItems">
+    {{ item | uppercase }}
+
+    <img
+      src="../assets/icons/close-tag.png"
+      alt="close-img"
+      (click)="addOrRemove(item)"
+      class="close-img"
+    />
+  </span>
+</div>
+<div class="filter-container">
+  <img
+    [src]="imagePath + imageName + '.svg'"
+    class="filter-icon"
+    alt="country-icon"
+    srcset=""
+  />
+  <div class="select-container" [class.disabled]="disabled">
+    <input
+      type="text"
+      class="search-input"
+      [placeholder]="placeholder"
+      (input)="setSearch($any($event.target).value)"
+      (focus)="toggleDropdown(true)"
+      [disabled]="disabled"
+    />
+
+    <div class="dropdown-list" *ngIf="dropdownOpen && filteredOptions().length">
+      <div
+        *ngFor="let option of filteredOptions()"
+        class="dropdown-item"
+        (click)="addOrRemove(option)"
+      >
+        {{ option | uppercase }}
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="close-icon"
+    *ngIf="filterItems.length > 0"
+    (click)="clearAllSelection()"
+  >
+    <img class="close-img" src="../assets/icons/close.png" alt="close-img" />
+  </div>
+</div>
