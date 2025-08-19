@@ -3,4 +3,4 @@
 
 [build]
   command = "ng build --configuration production"
-  publish = "dist/filter-app"
+  publish = "filterApp/dist/filter-app/browser"
