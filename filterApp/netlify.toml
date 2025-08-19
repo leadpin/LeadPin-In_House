@@ -1,2 +1,6 @@
 [[plugins]]
   package = "@netlify/plugin-angular-cli"
+
+[build]
+  command = "ng build --configuration production"
+  publish = "dist/filter-app"
