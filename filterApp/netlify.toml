@@ -1,5 +1,5 @@
 [build]
-publish = "dist/filter-app"
+publish = "filterApp/dist/filter-app"
 
 [[redirects]]
 from = "/*"
