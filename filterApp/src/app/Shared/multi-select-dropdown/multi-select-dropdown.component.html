@@ -1,0 +1,22 @@
+<div class="dropdown-container" [class.disabled]="disabled">
+  <button (click)="toggleDropdown()" class="dropdown-button">
+    Select Country
+    <span class="icon-wrapper">
+      <img
+        class="arrow-icon"
+        [class.open]="dropdownOpen"
+        src="../assets/icons/down-arrow.png"
+      />
+    </span>
+  </button>
+
+  <div class="dropdown-list" *ngIf="dropdownOpen">
+    <label
+      *ngFor="let option of options"
+      class="dropdown-item"
+      (click)="toggleSelection(option)"
+    >
+      {{ option | titlecase }}
+    </label>
+  </div>
+</div>
