@@ -1,7 +1,0 @@
-[build]
-publish = "dist/filter-app"
-
-[[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
